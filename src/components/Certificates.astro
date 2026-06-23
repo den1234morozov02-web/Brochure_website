@@ -46,26 +46,45 @@ const t = useTranslations(locale);
       }
     </ul>
 
+    <!-- Кнопка-тоггл галереи (сертификаты по умолчанию скрыты) -->
+    <div class="mt-10 text-center">
+      <button
+        id="cert-gallery-toggle"
+        type="button"
+        aria-expanded="false"
+        aria-controls="cert-gallery"
+        class="inline-flex items-center gap-2 rounded-full border border-gold/50 px-6 py-2.5 text-gold-soft transition-colors hover:bg-gold hover:text-ink"
+        data-label-show={t("cert.toggle")}
+        data-label-hide={t("cert.hide")}
+      >
+        <Icon name="lucide:images" class="h-5 w-5" />
+        <span data-toggle-label>{t("cert.toggle")}</span>
+        <Icon id="cert-chevron" name="lucide:chevron-down" class="h-4 w-4 transition-transform" />
+      </button>
+    </div>
+
     <!-- Галерея сертификатов (клик — увеличение) -->
-    <div class="mt-12 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-5">
-      {
-        [...certificates, { title: { en: "IMTA Membership", uk: "Членство IMTA" }, issuer: "IMTA", image: membership.image }].map((c) => (
-          <button
-            type="button"
-            class="cert-thumb group overflow-hidden rounded-lg bg-white/5 ring-1 ring-cream/10 transition hover:ring-gold/50"
-            data-cert-src={c.image}
-            data-cert-alt={c.title[locale]}
-            aria-label={`${t("cert.view")}: ${c.title[locale]}`}
-          >
-            <img
-              src={c.image}
-              alt={c.title[locale]}
-              loading="lazy"
-              class="aspect-[3/4] w-full object-cover transition group-hover:scale-105"
-            />
-          </button>
-        ))
-      }
+    <div id="cert-gallery" class="hidden">
+      <div class="mt-8 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-5">
+        {
+          [...certificates, { title: { en: "IMTA Membership", uk: "Членство IMTA" }, issuer: "IMTA", image: membership.image }].map((c) => (
+            <button
+              type="button"
+              class="cert-thumb group overflow-hidden rounded-lg bg-white/5 ring-1 ring-cream/10 transition hover:ring-gold/50"
+              data-cert-src={c.image}
+              data-cert-alt={c.title[locale]}
+              aria-label={`${t("cert.view")}: ${c.title[locale]}`}
+            >
+              <img
+                src={c.image}
+                alt={c.title[locale]}
+                loading="lazy"
+                class="aspect-[3/4] w-full object-cover transition group-hover:scale-105"
+              />
+            </button>
+          ))
+        }
+      </div>
     </div>
   </div>
 
@@ -88,6 +107,34 @@ const t = useTranslations(locale);
 </section>
 
 <script>
+  // --- Сворачиваемая галерея (по умолчанию скрыта) ---
+  const galToggle = document.getElementById("cert-gallery-toggle");
+  const gallery = document.getElementById("cert-gallery");
+  const chevron = document.getElementById("cert-chevron");
+  const galLabel = galToggle?.querySelector<HTMLElement>("[data-toggle-label]");
+
+  function setGallery(show: boolean) {
+    if (!gallery || !galToggle) return;
+    gallery.classList.toggle("hidden", !show);
+    galToggle.setAttribute("aria-expanded", String(show));
+    chevron?.classList.toggle("rotate-180", show);
+    if (galLabel) {
+      galLabel.textContent = show
+        ? galToggle.dataset.labelHide ?? ""
+        : galToggle.dataset.labelShow ?? "";
+    }
+  }
+
+  galToggle?.addEventListener("click", () =>
+    setGallery(gallery?.classList.contains("hidden") ?? false)
+  );
+
+  // Открытие галереи кликом по пункту "Qualifications" в навбаре
+  document.querySelectorAll('a[href$="#qualifications"]').forEach((link) => {
+    link.addEventListener("click", () => setGallery(true));
+  });
+
+  // --- Лайтбокс ---
   const box = document.getElementById("cert-lightbox");
   const full = document.getElementById("cert-full") as HTMLImageElement | null;
   const close = document.getElementById("cert-close");

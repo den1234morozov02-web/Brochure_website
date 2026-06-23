@@ -26,6 +26,8 @@ export const ui = {
       "Fully qualified and insured, with internationally recognised iTEC / VTCT diplomas.",
     "cert.member": "Status",
     "cert.view": "View certificate",
+    "cert.toggle": "View certificates",
+    "cert.hide": "Hide certificates",
 
     "services.title": "Services & Experiences",
     "services.subtitle": "Body & wellness experiences, tailored to you.",
@@ -92,6 +94,8 @@ export const ui = {
       "Повна кваліфікація та страхування, міжнародно визнані дипломи iTEC / VTCT.",
     "cert.member": "Статус",
     "cert.view": "Переглянути сертифікат",
+    "cert.toggle": "Переглянути сертифікати",
+    "cert.hide": "Сховати сертифікати",
 
     "services.title": "Послуги та досвід",
     "services.subtitle": "Тілесні та велнес-практики, підібрані для вас.",
