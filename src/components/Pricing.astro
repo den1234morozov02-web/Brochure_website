@@ -1,0 +1,55 @@
+---
+import { useTranslations } from "../i18n/ui";
+import { type Locale } from "../data/site";
+import { services, rituals } from "../data/services";
+
+interface Props {
+  locale: Locale;
+}
+const { locale } = Astro.props;
+const t = useTranslations(locale);
+
+// прайс = услуги + ритуалы одной таблицей
+const rows = [
+  ...services.map((s) => ({
+    name: s.name[locale],
+    duration: s.duration,
+    price: s.price,
+    note: s.priceNote?.[locale],
+  })),
+  ...rituals.map((r) => ({
+    name: r.name[locale],
+    duration: r.duration,
+    price: r.price,
+    note: undefined as string | undefined,
+  })),
+];
+---
+
+<section id="pricing" class="bg-ink py-20 text-cream md:py-28">
+  <div class="mx-auto max-w-3xl px-4">
+    <h2 class="text-center font-serif text-4xl text-gold-soft md:text-5xl">{t("pricing.title")}</h2>
+
+    <div class="mt-12 divide-y divide-cream/10">
+      {
+        rows.map((row) => (
+          <div class="flex items-baseline gap-3 py-4">
+            <span class="font-serif text-lg text-cream">{row.name}</span>
+            <span class="mx-2 flex-1 border-b border-dotted border-cream/25" />
+            <span class="whitespace-nowrap text-sm text-cream/60">
+              {row.duration} {t("services.min")}
+            </span>
+            <span class="w-24 text-right font-serif text-lg text-gold-soft">
+              €{row.price}
+              {row.note && <span class="block text-xs text-cream/50">{row.note}</span>}
+            </span>
+          </div>
+        ))
+      }
+    </div>
+
+    <p class="mt-10 text-center text-sm italic leading-relaxed text-cream/60">
+      {t("pricing.note")}
+    </p>
+  </div>
+</section>

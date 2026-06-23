@@ -1,0 +1,64 @@
+---
+import { Icon } from "astro-icon/components";
+import { useTranslations, localePath } from "../i18n/ui";
+import { site, type Locale } from "../data/site";
+
+interface Props {
+  locale: Locale;
+}
+const { locale } = Astro.props;
+const t = useTranslations(locale);
+const base = localePath(locale);
+
+const waText = encodeURIComponent(
+  locale === "uk"
+    ? "Вітаю! Хочу записатися на сеанс."
+    : "Hello! I'd like to book an appointment."
+);
+---
+
+<section
+  class="relative flex min-h-[90vh] items-center justify-center overflow-hidden bg-ink text-cream pt-16"
+>
+  <!-- мягкое золотое свечение на фоне -->
+  <div
+    class="pointer-events-none absolute inset-0 opacity-30"
+    style="background: radial-gradient(60% 60% at 50% 40%, rgba(201,162,75,0.35), transparent 70%);"
+  >
+  </div>
+
+  <div class="relative mx-auto max-w-3xl px-4 py-20 text-center">
+    <img
+      src="/media/logo.jpg"
+      alt="Abadzhi Wellness Space"
+      class="mx-auto h-40 w-40 rounded-full object-cover shadow-2xl ring-1 ring-gold/40"
+      width="160"
+      height="160"
+    />
+    <h1 class="mt-8 font-serif text-3xl sm:text-5xl md:text-6xl text-gold-soft text-balance">
+      Abadzhi Wellness Space
+    </h1>
+    <p class="mx-auto mt-5 max-w-xl text-lg text-cream/80">
+      {site.tagline[locale]}
+    </p>
+
+    <div class="mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row">
+      <a
+        href={`${base}/#contact`}
+        class="inline-flex items-center gap-2 rounded-full bg-gold px-6 py-3 font-medium text-ink hover:bg-gold-soft transition-colors"
+      >
+        <Icon name="lucide:calendar-heart" class="h-5 w-5" />
+        {t("hero.cta")}
+      </a>
+      <a
+        href={`https://wa.me/${site.whatsapp}?text=${waText}`}
+        target="_blank"
+        rel="noopener"
+        class="inline-flex items-center gap-2 rounded-full border border-cream/30 px-6 py-3 font-medium text-cream hover:border-gold hover:text-gold transition-colors"
+      >
+        <Icon name="lucide:message-circle" class="h-5 w-5" />
+        {t("hero.whatsapp")}
+      </a>
+    </div>
+  </div>
+</section>

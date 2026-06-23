@@ -1,0 +1,34 @@
+---
+import type { Locale } from "../data/site";
+
+interface Props {
+  locale: Locale;
+}
+const { locale } = Astro.props;
+
+// На сайте одна страница на локаль, поэтому переключатель ведёт на корень локали.
+const langs: { code: Locale; label: string; href: string }[] = [
+  { code: "en", label: "EN", href: "/" },
+  { code: "uk", label: "UK", href: "/uk/" },
+];
+---
+
+<div class="flex items-center gap-1 text-sm" aria-label="Language">
+  {
+    langs.map((l) => (
+      <a
+        href={l.href}
+        hreflang={l.code}
+        aria-current={l.code === locale ? "true" : undefined}
+        class:list={[
+          "px-2 py-1 rounded transition-colors",
+          l.code === locale
+            ? "text-gold font-medium"
+            : "text-cream/60 hover:text-cream",
+        ]}
+      >
+        {l.label}
+      </a>
+    ))
+  }
+</div>

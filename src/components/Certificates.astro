@@ -1,0 +1,122 @@
+---
+import { Icon } from "astro-icon/components";
+import { useTranslations } from "../i18n/ui";
+import { type Locale } from "../data/site";
+import { certificates, membership } from "../data/certificates";
+
+interface Props {
+  locale: Locale;
+}
+const { locale } = Astro.props;
+const t = useTranslations(locale);
+---
+
+<section id="qualifications" class="bg-ink py-20 text-cream md:py-28">
+  <div class="mx-auto max-w-6xl px-4">
+    <div class="mx-auto max-w-2xl text-center">
+      <h2 class="font-serif text-4xl text-gold-soft md:text-5xl">{t("cert.title")}</h2>
+      <p class="mt-4 text-cream/70">{t("cert.subtitle")}</p>
+    </div>
+
+    <!-- Членство IMTA -->
+    <div
+      class="mx-auto mt-10 flex max-w-xl items-center gap-4 rounded-2xl bg-gold/10 p-5 ring-1 ring-gold/30"
+    >
+      <Icon name="lucide:badge-check" class="h-10 w-10 shrink-0 text-gold" />
+      <div>
+        <p class="font-serif text-xl text-cream">{membership.org}</p>
+        <p class="text-sm text-gold-soft">
+          {t("cert.member")}: {membership.status[locale]} · No. {membership.number}
+        </p>
+      </div>
+    </div>
+
+    <!-- Список квалификаций -->
+    <ul class="mx-auto mt-10 grid max-w-4xl gap-x-8 gap-y-3 sm:grid-cols-2">
+      {
+        certificates.map((c) => (
+          <li class="flex items-start gap-2 text-cream/85">
+            <Icon name="lucide:award" class="mt-1 h-4 w-4 shrink-0 text-gold" />
+            <span>
+              {c.title[locale]}
+              <span class="text-cream/45"> · {c.issuer}</span>
+            </span>
+          </li>
+        ))
+      }
+    </ul>
+
+    <!-- Галерея сертификатов (клик — увеличение) -->
+    <div class="mt-12 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-5">
+      {
+        [...certificates, { title: { en: "IMTA Membership", uk: "Членство IMTA" }, issuer: "IMTA", image: membership.image }].map((c) => (
+          <button
+            type="button"
+            class="cert-thumb group overflow-hidden rounded-lg bg-white/5 ring-1 ring-cream/10 transition hover:ring-gold/50"
+            data-cert-src={c.image}
+            data-cert-alt={c.title[locale]}
+            aria-label={`${t("cert.view")}: ${c.title[locale]}`}
+          >
+            <img
+              src={c.image}
+              alt={c.title[locale]}
+              loading="lazy"
+              class="aspect-[3/4] w-full object-cover transition group-hover:scale-105"
+            />
+          </button>
+        ))
+      }
+    </div>
+  </div>
+
+  <!-- Лайтбокс -->
+  <div
+    id="cert-lightbox"
+    class="fixed inset-0 z-[60] hidden items-center justify-center bg-ink/90 p-4 backdrop-blur"
+    role="dialog"
+    aria-modal="true"
+  >
+    <button
+      id="cert-close"
+      class="absolute right-4 top-4 rounded-full bg-cream/10 p-2 text-cream hover:bg-cream/20"
+      aria-label="Close"
+    >
+      <Icon name="lucide:x" class="h-6 w-6" />
+    </button>
+    <img id="cert-full" src="" alt="" class="max-h-[90vh] max-w-full rounded-lg object-contain shadow-2xl" />
+  </div>
+</section>
+
+<script>
+  const box = document.getElementById("cert-lightbox");
+  const full = document.getElementById("cert-full") as HTMLImageElement | null;
+  const close = document.getElementById("cert-close");
+
+  function open(src: string, alt: string) {
+    if (!box || !full) return;
+    full.src = src;
+    full.alt = alt;
+    box.classList.remove("hidden");
+    box.classList.add("flex");
+    document.body.style.overflow = "hidden";
+  }
+  function hide() {
+    if (!box) return;
+    box.classList.add("hidden");
+    box.classList.remove("flex");
+    document.body.style.overflow = "";
+  }
+
+  document.querySelectorAll<HTMLButtonElement>(".cert-thumb").forEach((btn) => {
+    btn.addEventListener("click", () =>
+      open(btn.dataset.certSrc ?? "", btn.dataset.certAlt ?? "")
+    );
+  });
+  close?.addEventListener("click", hide);
+  box?.addEventListener("click", (e) => {
+    if (e.target === box) hide();
+  });
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") hide();
+  });
+</script>

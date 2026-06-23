@@ -1,0 +1,54 @@
+@import "tailwindcss";
+
+/* ------------------------------------------------------------------ *
+ * Дизайн-токены Abadzhi Wellness Space
+ * Палитра взята из логотипа (золото на тёмном) и инфографики
+ * (зелёно-кремовые wellness-тона). Меняешь тут — меняется везде.
+ * ------------------------------------------------------------------ */
+@theme {
+  /* Фирменные цвета */
+  --color-ink: #1c1c1e; /* тёмный фон логотипа */
+  --color-ink-soft: #2a2a2d;
+  --color-gold: #c9a24b; /* золото логотипа */
+  --color-gold-soft: #e3c987;
+  --color-sage: #7d8a6f; /* зелёный wellness */
+  --color-sage-deep: #4a5742;
+  --color-cream: #f7f4ec; /* кремовый фон секций */
+  --color-cream-deep: #efe9da;
+
+  /* Шрифты */
+  --font-serif: "Cormorant Garamond", Georgia, serif;
+  --font-sans: "Jost", "Segoe UI", system-ui, sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+  /* отступ под фиксированный хедер при якорной навигации */
+  scroll-padding-top: 5rem;
+}
+
+body {
+  font-family: var(--font-sans);
+  color: var(--color-ink);
+  background: var(--color-cream);
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-serif);
+  font-weight: 500;
+  line-height: 1.1;
+}
+
+/* Доступный фокус для клавиатуры */
+:focus-visible {
+  outline: 2px solid var(--color-gold);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}

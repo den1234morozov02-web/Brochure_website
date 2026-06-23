@@ -1,0 +1,104 @@
+---
+import { Icon } from "astro-icon/components";
+import { useTranslations, localePath } from "../i18n/ui";
+import { type Locale } from "../data/site";
+import LanguagePicker from "./LanguagePicker.astro";
+
+interface Props {
+  locale: Locale;
+}
+const { locale } = Astro.props;
+const t = useTranslations(locale);
+const base = localePath(locale);
+
+const nav = [
+  { href: `${base}/#about`, label: t("nav.about") },
+  { href: `${base}/#qualifications`, label: t("nav.qualifications") },
+  { href: `${base}/#services`, label: t("nav.services") },
+  { href: `${base}/#rituals`, label: t("nav.rituals") },
+  { href: `${base}/#pricing`, label: t("nav.pricing") },
+  { href: `${base}/#contact`, label: t("nav.contact") },
+];
+---
+
+<header
+  class="fixed top-0 inset-x-0 z-50 bg-ink/95 backdrop-blur border-b border-gold/20 text-cream"
+>
+  <nav class="mx-auto max-w-6xl px-4 h-16 flex items-center justify-between gap-4">
+    <a href={`${base}/`} class="flex items-center gap-2 shrink-0">
+      <img src="/media/logo.jpg" alt="Abadzhi Wellness Space" class="h-10 w-10 rounded-full object-cover" />
+      <span class="font-serif text-lg tracking-wide hidden sm:inline">Abadzhi</span>
+    </a>
+
+    <!-- Desktop nav -->
+    <ul class="hidden lg:flex items-center gap-6 text-sm">
+      {nav.map((item) => (
+        <li>
+          <a href={item.href} class="text-cream/80 hover:text-gold transition-colors">{item.label}</a>
+        </li>
+      ))}
+    </ul>
+
+    <div class="flex items-center gap-3">
+      <LanguagePicker locale={locale} />
+      <a
+        href={`${base}/#contact`}
+        class="hidden sm:inline-flex items-center rounded-full bg-gold px-4 py-2 text-sm font-medium text-ink hover:bg-gold-soft transition-colors"
+      >
+        {t("nav.book")}
+      </a>
+      <!-- Mobile menu toggle -->
+      <button
+        id="menu-toggle"
+        class="lg:hidden p-2 -mr-2 text-cream"
+        aria-label="Menu"
+        aria-expanded="false"
+        aria-controls="mobile-menu"
+      >
+        <Icon name="lucide:menu" class="h-6 w-6" />
+      </button>
+    </div>
+  </nav>
+
+  <!-- Mobile menu -->
+  <div id="mobile-menu" class="lg:hidden hidden border-t border-gold/20 bg-ink">
+    <ul class="px-4 py-3 space-y-1">
+      {nav.map((item) => (
+        <li>
+          <a
+            href={item.href}
+            class="block py-2 text-cream/80 hover:text-gold transition-colors"
+            data-mobile-link
+          >
+            {item.label}
+          </a>
+        </li>
+      ))}
+      <li>
+        <a
+          href={`${base}/#contact`}
+          class="mt-2 block rounded-full bg-gold px-4 py-2 text-center font-medium text-ink"
+          data-mobile-link
+        >
+          {t("nav.book")}
+        </a>
+      </li>
+    </ul>
+  </div>
+</header>
+
+<script>
+  const toggle = document.getElementById("menu-toggle");
+  const menu = document.getElementById("mobile-menu");
+  toggle?.addEventListener("click", () => {
+    const open = menu?.classList.toggle("hidden") === false;
+    toggle.setAttribute("aria-expanded", String(open));
+  });
+  // закрываем меню после клика по ссылке
+  document.querySelectorAll("[data-mobile-link]").forEach((link) => {
+    link.addEventListener("click", () => {
+      menu?.classList.add("hidden");
+      toggle?.setAttribute("aria-expanded", "false");
+    });
+  });
+</script>

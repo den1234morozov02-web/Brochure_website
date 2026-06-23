@@ -1,0 +1,27 @@
+---
+import { useTranslations } from "../i18n/ui";
+import { type Locale } from "../data/site";
+
+interface Props {
+  locale: Locale;
+}
+const { locale } = Astro.props;
+const t = useTranslations(locale);
+---
+
+<section id="about" class="bg-cream py-20 md:py-28">
+  <div class="mx-auto grid max-w-6xl items-center gap-10 px-4 md:grid-cols-2 md:gap-16">
+    <!-- ПЛЕЙСХОЛДЕР: сюда фото мастера (её лицо) -->
+    <div
+      class="flex aspect-[4/5] items-center justify-center rounded-2xl bg-cream-deep text-sage-deep/40"
+    >
+      <span class="font-serif text-xl">Photo coming soon</span>
+    </div>
+
+    <div>
+      <p class="text-sm uppercase tracking-[0.2em] text-sage">{t("about.title")}</p>
+      <h2 class="mt-2 font-serif text-4xl text-ink md:text-5xl">Tetiana Abadzhi</h2>
+      <p class="mt-6 text-lg leading-relaxed text-ink/75">{t("about.body")}</p>
+    </div>
+  </div>
+</section>

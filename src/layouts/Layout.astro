@@ -1,0 +1,69 @@
+---
+import "../styles/global.css";
+import { site, type Locale } from "../data/site";
+
+interface Props {
+  locale: Locale;
+}
+const { locale } = Astro.props;
+
+const title = `${site.name} — ${site.tagline[locale]}`;
+const description = site.tagline[locale];
+const canonical = new URL(Astro.url.pathname, Astro.site).href;
+const ogImage = new URL("/media/logo.jpg", Astro.site).href;
+---
+
+<!doctype html>
+<html lang={locale}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+
+    <!-- favicon из логотипа -->
+    <link rel="icon" type="image/jpeg" href="/media/logo.jpg" />
+    <link rel="apple-touch-icon" href="/media/logo.jpg" />
+
+    <!-- hreflang для двух локалей -->
+    <link rel="alternate" hreflang="en" href={new URL("/", Astro.site).href} />
+    <link rel="alternate" hreflang="uk" href={new URL("/uk/", Astro.site).href} />
+    <link rel="alternate" hreflang="x-default" href={new URL("/", Astro.site).href} />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:url" content={canonical} />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <!-- Шрифты -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Jost:wght@300;400;500&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Schema.org: локальный бизнес (важно для локального SEO) -->
+    <script
+      type="application/ld+json"
+      set:html={JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "HealthAndBeautyBusiness",
+        name: site.name,
+        image: ogImage,
+        url: canonical,
+        telephone: site.phone,
+        email: site.email,
+        address: site.address[locale],
+        sameAs: [site.instagram],
+      })}
+    />
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>

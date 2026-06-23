@@ -1,0 +1,66 @@
+---
+import { Icon } from "astro-icon/components";
+import { useTranslations, localePath } from "../i18n/ui";
+import { type Locale } from "../data/site";
+import { rituals } from "../data/services";
+
+interface Props {
+  locale: Locale;
+}
+const { locale } = Astro.props;
+const t = useTranslations(locale);
+const base = localePath(locale);
+---
+
+<section id="rituals" class="bg-cream py-20 md:py-28">
+  <div class="mx-auto max-w-6xl px-4">
+    <div class="mx-auto max-w-2xl text-center">
+      <h2 class="font-serif text-4xl text-ink md:text-5xl">{t("rituals.title")}</h2>
+      <p class="mt-4 text-ink/65">{t("rituals.subtitle")}</p>
+    </div>
+
+    <div class="mt-14 grid gap-8 md:grid-cols-2">
+      {
+        rituals.map((r) => (
+          <article class="overflow-hidden rounded-2xl bg-white shadow-sm ring-1 ring-cream-deep">
+            <img
+              src={r.image}
+              alt={r.name[locale]}
+              class="h-56 w-full object-cover"
+              loading="lazy"
+            />
+            <div class="p-7">
+              <div class="flex items-baseline justify-between gap-4">
+                <h3 class="font-serif text-2xl text-ink">{r.name[locale]}</h3>
+                <span class="shrink-0 font-serif text-xl text-sage-deep">€{r.price}</span>
+              </div>
+              <p class="mt-1 text-sm uppercase tracking-wider text-sage">
+                {r.duration} {t("services.min")} · {r.subtitle[locale]}
+              </p>
+              <p class="mt-4 text-ink/75">{r.desc[locale]}</p>
+
+              <p class="mt-6 text-sm font-medium uppercase tracking-wider text-sage-deep">
+                {t("rituals.includes")}
+              </p>
+              <ul class="mt-3 space-y-2">
+                {r.includes[locale].map((item) => (
+                  <li class="flex items-start gap-2 text-sm text-ink/75">
+                    <Icon name="lucide:leaf" class="mt-0.5 h-4 w-4 shrink-0 text-sage" />
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+
+              <a
+                href={`${base}/#contact`}
+                class="mt-7 inline-flex items-center justify-center rounded-full bg-sage-deep px-5 py-2.5 text-sm font-medium text-cream transition-colors hover:bg-sage"
+              >
+                {t("rituals.book")}
+              </a>
+            </div>
+          </article>
+        ))
+      }
+    </div>
+  </div>
+</section>

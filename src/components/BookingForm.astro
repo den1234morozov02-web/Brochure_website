@@ -1,0 +1,104 @@
+---
+import { useTranslations } from "../i18n/ui";
+import { site, type Locale } from "../data/site";
+import { services, rituals } from "../data/services";
+
+interface Props {
+  locale: Locale;
+}
+const { locale } = Astro.props;
+const t = useTranslations(locale);
+
+const options = [
+  ...services.map((s) => s.name[locale]),
+  ...rituals.map((r) => r.name[locale]),
+];
+
+// Через выражение, иначе Astro срежет обратные слэши в литерале атрибута.
+// Скобки экранированы — иначе Chrome (флаг 'v') считает regex невалидным и игнорирует pattern.
+const phonePattern = "[\\d\\s+\\(\\)\\.\\-]{7,20}";
+---
+
+<form class="w3form space-y-4" data-kind="booking">
+  <input type="hidden" name="access_key" value={site.web3formsKey} />
+  <input type="hidden" name="subject" value="New booking request — Abadzhi" />
+  <input type="hidden" name="from_name" value="Abadzhi website" />
+  <input type="checkbox" name="botcheck" class="hidden" tabindex="-1" autocomplete="off" />
+
+  <div class="grid gap-4 sm:grid-cols-2">
+    <label class="block">
+      <span class="text-sm text-ink/70">{t("form.name")} *</span>
+      <input
+        type="text"
+        name="name"
+        required
+        class="mt-1 w-full rounded-lg border border-cream-deep bg-white px-3 py-2 focus:border-sage"
+      />
+    </label>
+    <label class="block">
+      <span class="text-sm text-ink/70">{t("form.phone")} *</span>
+      <input
+        type="tel"
+        name="phone"
+        required
+        inputmode="tel"
+        pattern={phonePattern}
+        title={t("form.phoneHint")}
+        class="mt-1 w-full rounded-lg border border-cream-deep bg-white px-3 py-2 focus:border-sage"
+      />
+    </label>
+  </div>
+
+  <div class="grid gap-4 sm:grid-cols-2">
+    <label class="block">
+      <span class="text-sm text-ink/70">{t("form.email")}</span>
+      <input
+        type="email"
+        name="email"
+        class="mt-1 w-full rounded-lg border border-cream-deep bg-white px-3 py-2 focus:border-sage"
+      />
+    </label>
+    <label class="block">
+      <span class="text-sm text-ink/70">{t("form.date")}</span>
+      <input
+        type="text"
+        name="preferred_time"
+        class="mt-1 w-full rounded-lg border border-cream-deep bg-white px-3 py-2 focus:border-sage"
+      />
+    </label>
+  </div>
+
+  <label class="block">
+    <span class="text-sm text-ink/70">{t("form.service")}</span>
+    <select
+      name="service"
+      class="mt-1 w-full rounded-lg border border-cream-deep bg-white px-3 py-2 focus:border-sage"
+    >
+      <option value="">{t("form.servicePick")}</option>
+      {options.map((o) => <option value={o}>{o}</option>)}
+    </select>
+  </label>
+
+  <label class="block">
+    <span class="text-sm text-ink/70">{t("form.message")}</span>
+    <textarea
+      name="message"
+      rows="3"
+      class="mt-1 w-full rounded-lg border border-cream-deep bg-white px-3 py-2 focus:border-sage"
+    ></textarea>
+  </label>
+
+  <button
+    type="submit"
+    class="inline-flex items-center rounded-full bg-sage-deep px-6 py-2.5 font-medium text-cream transition-colors hover:bg-sage disabled:opacity-60"
+  >
+    <span data-label>{t("form.send")}</span>
+  </button>
+
+  <p
+    class="form-status hidden text-sm"
+    data-ok={t("form.success")}
+    data-err={t("form.error")}
+    data-sending={t("form.sending")}
+  ></p>
+</form>
