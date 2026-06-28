@@ -11,12 +11,14 @@ const t = useTranslations(locale);
 
 <section id="about" class="bg-cream py-20 md:py-28">
   <div class="mx-auto grid max-w-6xl items-center gap-10 px-4 md:grid-cols-2 md:gap-16">
-    <!-- ПЛЕЙСХОЛДЕР: сюда фото мастера (её лицо) -->
-    <div
-      class="flex aspect-[4/5] items-center justify-center rounded-2xl bg-cream-deep text-sage-deep/40"
-    >
-      <span class="font-serif text-xl">Photo coming soon</span>
-    </div>
+    <img
+      src="/media/about-owner.jpg"
+      alt="Tetiana Abadzhi — Abadzhi Wellness Space"
+      class="mx-auto w-full max-w-md rounded-2xl object-cover shadow-md md:max-w-none"
+      width="1422"
+      height="1106"
+      loading="lazy"
+    />
 
     <div>
       <p class="text-sm uppercase tracking-[0.2em] text-sage">{t("about.title")}</p>

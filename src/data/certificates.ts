@@ -14,6 +14,7 @@ export const membership = {
   org: "Irish Massage Therapists Association (IMTA)",
   status: { en: "Full Member", uk: "Повноправний член" },
   number: "2972",
+  validUntil: "14 March 2027",
   image: "/media/certificates/imta-membership.jpg",
 };
 

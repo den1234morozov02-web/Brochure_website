@@ -17,6 +17,7 @@ const nav = [
   { href: `${base}/#services`, label: t("nav.services") },
   { href: `${base}/#rituals`, label: t("nav.rituals") },
   { href: `${base}/#pricing`, label: t("nav.pricing") },
+  { href: `${base}/#faq`, label: t("nav.faq") },
   { href: `${base}/#contact`, label: t("nav.contact") },
 ];
 ---
@@ -31,7 +32,7 @@ const nav = [
     </a>
 
     <!-- Desktop nav -->
-    <ul class="hidden lg:flex items-center gap-6 text-sm">
+    <ul class="hidden lg:flex items-center gap-6 text-base">
       {nav.map((item) => (
         <li>
           <a href={item.href} class="text-cream/80 hover:text-gold transition-colors">{item.label}</a>

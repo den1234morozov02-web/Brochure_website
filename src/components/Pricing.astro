@@ -34,21 +34,21 @@ const rows = [
       {
         rows.map((row) => (
           <div class="flex items-baseline gap-3 py-4">
-            <span class="font-serif text-lg text-cream">{row.name}</span>
+            <span class="font-serif text-xl text-cream">{row.name}</span>
             <span class="mx-2 flex-1 border-b border-dotted border-cream/25" />
-            <span class="whitespace-nowrap text-sm text-cream/60">
+            <span class="whitespace-nowrap text-base text-cream/60">
               {row.duration} {t("services.min")}
             </span>
-            <span class="w-24 text-right font-serif text-lg text-gold-soft">
+            <span class="w-24 text-right font-serif text-xl text-gold-soft">
               €{row.price}
-              {row.note && <span class="block text-xs text-cream/50">{row.note}</span>}
+              {row.note && <span class="block text-sm text-cream/50">{row.note}</span>}
             </span>
           </div>
         ))
       }
     </div>
 
-    <p class="mt-10 text-center text-sm italic leading-relaxed text-cream/60">
+    <p class="mt-10 text-center text-base italic leading-relaxed text-cream/60">
       {t("pricing.note")}
     </p>
   </div>

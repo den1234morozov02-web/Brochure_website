@@ -18,16 +18,36 @@ const t = useTranslations(locale);
       <p class="mt-4 text-cream/70">{t("cert.subtitle")}</p>
     </div>
 
-    <!-- Членство IMTA -->
+    <!-- Главный сертификат: членство IMTA — всегда на виду -->
     <div
-      class="mx-auto mt-10 flex max-w-xl items-center gap-4 rounded-2xl bg-gold/10 p-5 ring-1 ring-gold/30"
+      class="mx-auto mt-10 max-w-3xl rounded-2xl bg-gold/10 p-5 ring-1 ring-gold/30 sm:p-7"
     >
-      <Icon name="lucide:badge-check" class="h-10 w-10 shrink-0 text-gold" />
-      <div>
-        <p class="font-serif text-xl text-cream">{membership.org}</p>
-        <p class="text-sm text-gold-soft">
-          {t("cert.member")}: {membership.status[locale]} · No. {membership.number}
-        </p>
+      <div class="flex flex-col items-center gap-6 sm:flex-row sm:items-center">
+        <button
+          type="button"
+          class="cert-thumb group shrink-0 overflow-hidden rounded-lg bg-white shadow-lg ring-1 ring-gold/30 transition hover:ring-gold/60"
+          data-cert-src={membership.image}
+          data-cert-alt={membership.org}
+          aria-label={`${t("cert.view")}: ${membership.org}`}
+        >
+          <img
+            src={membership.image}
+            alt={membership.org}
+            class="h-64 w-auto object-contain transition group-hover:scale-[1.03]"
+          />
+        </button>
+        <div class="text-center sm:text-left">
+          <span
+            class="inline-flex items-center gap-2 rounded-full bg-gold/15 px-3 py-1 text-xs font-medium uppercase tracking-wider text-gold-soft"
+          >
+            <Icon name="lucide:badge-check" class="h-4 w-4" />
+            {membership.status[locale]}
+          </span>
+          <p class="mt-3 font-serif text-2xl text-cream">{membership.org}</p>
+          <p class="mt-2 text-sm text-cream/70">{t("cert.member")}: {membership.status[locale]}</p>
+          <p class="text-sm text-cream/70">No. {membership.number}</p>
+          <p class="text-sm text-cream/70">{t("cert.validUntil")}: {membership.validUntil}</p>
+        </div>
       </div>
     </div>
 
@@ -67,7 +87,7 @@ const t = useTranslations(locale);
     <div id="cert-gallery" class="hidden">
       <div class="mt-8 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-5">
         {
-          [...certificates, { title: { en: "IMTA Membership", uk: "Членство IMTA" }, issuer: "IMTA", image: membership.image }].map((c) => (
+          certificates.map((c) => (
             <button
               type="button"
               class="cert-thumb group overflow-hidden rounded-lg bg-white/5 ring-1 ring-cream/10 transition hover:ring-gold/50"

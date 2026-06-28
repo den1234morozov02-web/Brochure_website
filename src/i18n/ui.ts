@@ -10,6 +10,7 @@ export const ui = {
     "nav.services": "Services",
     "nav.rituals": "Rituals",
     "nav.pricing": "Pricing",
+    "nav.faq": "FAQ",
     "nav.qualifications": "Qualifications",
     "nav.contact": "Contact",
     "nav.book": "Book now",
@@ -25,6 +26,7 @@ export const ui = {
     "cert.subtitle":
       "Fully qualified and insured, with internationally recognised iTEC / VTCT diplomas.",
     "cert.member": "Status",
+    "cert.validUntil": "Valid until",
     "cert.view": "View certificate",
     "cert.toggle": "View certificates",
     "cert.hide": "Hide certificates",
@@ -35,9 +37,12 @@ export const ui = {
     "services.book": "Book",
 
     "rituals.title": "Signature Rituals",
-    "rituals.subtitle": "Two-hour holistic journeys to fully reset.",
+    "rituals.subtitle": "Immersive holistic journeys, crafted to fully restore you.",
     "rituals.includes": "Includes",
     "rituals.book": "Book this ritual",
+
+    "faq.title": "Frequently Asked Questions",
+    "faq.subtitle": "Everything you might want to know before your visit.",
 
     "pricing.title": "Price List",
     "pricing.note":
@@ -78,6 +83,7 @@ export const ui = {
     "nav.services": "Послуги",
     "nav.rituals": "Ритуали",
     "nav.pricing": "Ціни",
+    "nav.faq": "Питання",
     "nav.qualifications": "Кваліфікація",
     "nav.contact": "Контакти",
     "nav.book": "Записатися",
@@ -93,6 +99,7 @@ export const ui = {
     "cert.subtitle":
       "Повна кваліфікація та страхування, міжнародно визнані дипломи iTEC / VTCT.",
     "cert.member": "Статус",
+    "cert.validUntil": "Дійсний до",
     "cert.view": "Переглянути сертифікат",
     "cert.toggle": "Переглянути сертифікати",
     "cert.hide": "Сховати сертифікати",
@@ -103,9 +110,12 @@ export const ui = {
     "services.book": "Записатись",
 
     "rituals.title": "Фірмові ритуали",
-    "rituals.subtitle": "Двогодинні цілісні подорожі для повного перезавантаження.",
+    "rituals.subtitle": "Занурювальні цілісні подорожі для повного відновлення.",
     "rituals.includes": "Включає",
     "rituals.book": "Записатись на ритуал",
+
+    "faq.title": "Часті запитання",
+    "faq.subtitle": "Усе, що варто знати перед візитом.",
 
     "pricing.title": "Прайс-лист",
     "pricing.note":
