@@ -20,7 +20,7 @@ export const ui = {
 
     "about.title": "About",
     "about.body":
-      "I create personalised wellness rituals for people who feel overwhelmed, disconnected, exhausted or constantly in “doing mode”. Each session combines breathwork, meditation, aromatherapy and therapeutic touch to help restore balance, calm the nervous system and create space for deep rest.",
+      "Based in the heart of Dublin 2, I create personalised wellness rituals for people who feel overwhelmed, disconnected, exhausted or constantly in “doing mode”. Each session combines breathwork, meditation, aromatherapy, reflexology and therapeutic touch to help restore balance, calm the nervous system and create space for deep rest.",
 
     "cert.title": "Qualifications & Certifications",
     "cert.subtitle":
@@ -93,7 +93,7 @@ export const ui = {
 
     "about.title": "Про нас",
     "about.body":
-      "Я створюю індивідуальні велнес-ритуали для тих, хто почувається перевантаженим, виснаженим, втратив зв'язок із собою або постійно перебуває в режимі «треба все встигнути». Кожен сеанс поєднує дихальні практики, медитацію, ароматерапію та терапевтичний дотик, щоб відновити рівновагу, заспокоїти нервову систему та створити простір для глибокого відпочинку.",
+      "У самому серці Дубліна (Dublin 2) я створюю індивідуальні велнес-ритуали для тих, хто почувається перевантаженим, виснаженим, втратив зв'язок із собою або постійно перебуває в режимі «треба все встигнути». Кожен сеанс поєднує дихальні практики, медитацію, ароматерапію, рефлексологію та терапевтичний дотик, щоб відновити рівновагу, заспокоїти нервову систему та створити простір для глибокого відпочинку.",
 
     "cert.title": "Кваліфікація та сертифікати",
     "cert.subtitle":

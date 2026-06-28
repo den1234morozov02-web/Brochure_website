@@ -9,7 +9,20 @@ interface Props {
 }
 const { locale } = Astro.props;
 const t = useTranslations(locale);
+
+// FAQPage structured data — шанс на rich-результат в Google
+const faqLd = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faq.map((item) => ({
+    "@type": "Question",
+    name: item.q[locale],
+    acceptedAnswer: { "@type": "Answer", text: item.a[locale] },
+  })),
+};
 ---
+
+<script type="application/ld+json" set:html={JSON.stringify(faqLd)} />
 
 <section id="faq" class="bg-cream pt-20 pb-12 md:pt-28 md:pb-14">
   <div class="mx-auto max-w-3xl px-4">
@@ -34,7 +47,9 @@ const t = useTranslations(locale);
               {item.image && (
                 <img
                   src={item.image}
-                  alt={item.q[locale]}
+                  alt={locale === "uk"
+                    ? "Подарунковий сертифікат Abadzhi Wellness Space, Дублін"
+                    : "Abadzhi Wellness Space gift certificate, Dublin"}
                   class="mt-4 w-full max-w-md rounded-xl shadow-sm ring-1 ring-cream-deep"
                   loading="lazy"
                 />

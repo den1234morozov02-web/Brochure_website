@@ -1,16 +1,62 @@
 ---
 import "../styles/global.css";
 import { site, type Locale } from "../data/site";
+import { services, rituals } from "../data/services";
 
 interface Props {
   locale: Locale;
+  title?: string;
+  description?: string;
 }
 const { locale } = Astro.props;
 
-const title = `${site.name} — ${site.tagline[locale]}`;
-const description = site.tagline[locale];
+const title = Astro.props.title ?? site.seo[locale].title;
+const description = Astro.props.description ?? site.seo[locale].description;
 const canonical = new URL(Astro.url.pathname, Astro.site).href;
-const ogImage = new URL("/media/logo.jpg", Astro.site).href;
+const ogImage = new URL("/media/og-image.jpg", Astro.site).href;
+
+// --- Structured data: локальный бизнес (Schema.org) ---
+const businessLd = {
+  "@context": "https://schema.org",
+  "@type": ["HealthAndBeautyBusiness", "DaySpa"],
+  "@id": `${new URL("/", Astro.site).href}#business`,
+  name: site.name,
+  description: site.seo[locale].description,
+  image: ogImage,
+  url: canonical,
+  telephone: site.phone,
+  email: site.email,
+  priceRange: site.priceRange,
+  currenciesAccepted: "EUR",
+  address: {
+    "@type": "PostalAddress",
+    streetAddress: site.addressParts.street,
+    addressLocality: site.addressParts.locality,
+    addressRegion: site.addressParts.region,
+    postalCode: site.addressParts.postalCode,
+    addressCountry: site.addressParts.country,
+  },
+  geo: {
+    "@type": "GeoCoordinates",
+    latitude: site.geo.lat,
+    longitude: site.geo.lng,
+  },
+  hasMap: site.mapLink,
+  areaServed: { "@type": "City", name: "Dublin" },
+  openingHoursSpecification: site.openingHours.map((h) => ({
+    "@type": "OpeningHoursSpecification",
+    dayOfWeek: h.days,
+    opens: h.opens,
+    closes: h.closes,
+  })),
+  makesOffer: [...services, ...rituals].map((s) => ({
+    "@type": "Offer",
+    priceCurrency: "EUR",
+    price: s.price,
+    itemOffered: { "@type": "Service", name: s.name[locale] },
+  })),
+  sameAs: [site.instagram],
+};
 ---
 
 <!doctype html>
@@ -20,7 +66,14 @@ const ogImage = new URL("/media/logo.jpg", Astro.site).href;
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title}</title>
     <meta name="description" content={description} />
+    <meta name="robots" content="index, follow" />
     <link rel="canonical" href={canonical} />
+
+    <!-- Гео-метки для локального поиска -->
+    <meta name="geo.region" content="IE" />
+    <meta name="geo.placename" content="Dublin" />
+    <meta name="geo.position" content={`${site.geo.lat};${site.geo.lng}`} />
+    <meta name="ICBM" content={`${site.geo.lat}, ${site.geo.lng}`} />
 
     <!-- favicon из логотипа -->
     <link rel="icon" type="image/jpeg" href="/media/logo.jpg" />
@@ -32,12 +85,20 @@ const ogImage = new URL("/media/logo.jpg", Astro.site).href;
     <link rel="alternate" hreflang="x-default" href={new URL("/", Astro.site).href} />
 
     <!-- Open Graph -->
-    <meta property="og:type" content="website" />
+    <meta property="og:type" content="business.business" />
+    <meta property="og:site_name" content={site.name} />
+    <meta property="og:locale" content={locale === "uk" ? "uk_UA" : "en_IE"} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={`${site.name} — Tetiana Abadzhi, Dublin`} />
     <meta property="og:url" content={canonical} />
     <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
 
     <!-- Шрифты -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -48,20 +109,7 @@ const ogImage = new URL("/media/logo.jpg", Astro.site).href;
     />
 
     <!-- Schema.org: локальный бизнес (важно для локального SEO) -->
-    <script
-      type="application/ld+json"
-      set:html={JSON.stringify({
-        "@context": "https://schema.org",
-        "@type": "HealthAndBeautyBusiness",
-        name: site.name,
-        image: ogImage,
-        url: canonical,
-        telephone: site.phone,
-        email: site.email,
-        address: site.address[locale],
-        sameAs: [site.instagram],
-      })}
-    />
+    <script type="application/ld+json" set:html={JSON.stringify(businessLd)} />
   </head>
   <body>
     <slot />
