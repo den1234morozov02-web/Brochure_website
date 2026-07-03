@@ -62,24 +62,23 @@ export const site = {
   // --- Часы работы ---
   hours: {
     en: [
-      { days: "Mon – Fri", time: "9:00 – 19:00" },
-      { days: "Saturday", time: "10:00 – 17:00" },
-      { days: "Sunday", time: "Closed" },
+      { days: "Tue – Thu", time: "10:00 AM – 8:00 PM" },
+      { days: "Sunday", time: "10:00 AM – 8:00 PM" },
+      { days: "Mon, Fri, Sat", time: "Closed" },
     ],
     uk: [
-      { days: "Пн – Пт", time: "9:00 – 19:00" },
-      { days: "Субота", time: "10:00 – 17:00" },
-      { days: "Неділя", time: "Вихідний" },
+      { days: "Вт – Чт", time: "10:00 – 20:00" },
+      { days: "Неділя", time: "10:00 – 20:00" },
+      { days: "Пн, Пт, Сб", time: "Вихідний" },
     ],
   },
   // Машиночитаемые часы для Schema.org (openingHoursSpecification)
   openingHours: [
     {
-      days: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
-      opens: "09:00",
-      closes: "19:00",
+      days: ["Tuesday", "Wednesday", "Thursday", "Sunday"],
+      opens: "10:00",
+      closes: "20:00",
     },
-    { days: ["Saturday"], opens: "10:00", closes: "17:00" },
   ],
 
   // --- Соцсети ---
