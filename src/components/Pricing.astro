@@ -33,15 +33,16 @@ const rows = [
     <div class="mt-12 divide-y divide-cream/10">
       {
         rows.map((row) => (
-          <div class="flex items-baseline gap-3 py-4">
-            <span class="font-serif text-xl text-cream">{row.name}</span>
-            <span class="mx-2 flex-1 border-b border-dotted border-cream/25" />
-            <span class="whitespace-nowrap text-base text-cream/60">
-              {row.duration} {t("services.min")}
-            </span>
-            <span class="w-24 text-right font-serif text-xl text-gold-soft">
-              €{row.price}
-              {row.note && <span class="block text-sm text-cream/50">{row.note}</span>}
+          <div class="flex items-baseline justify-between gap-4 py-4">
+            <span class="min-w-0 font-serif text-xl text-cream">{row.name}</span>
+            <span class="flex shrink-0 items-baseline gap-4">
+              <span class="w-16 whitespace-nowrap text-right text-base text-cream/60 sm:w-20">
+                {row.duration} {t("services.min")}
+              </span>
+              <span class="w-16 text-right font-serif text-xl text-gold-soft">
+                €{row.price}
+                {row.note && <span class="block text-xs text-cream/50">{row.note}</span>}
+              </span>
             </span>
           </div>
         ))
