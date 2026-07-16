@@ -5,7 +5,7 @@ import icon from "astro-icon";
 import sitemap from "@astrojs/sitemap";
 
 // Меняешь домен здесь после покупки — используется для sitemap и canonical/OG.
-const SITE = "https://abadzhi.ie";
+const SITE = "https://abadzhi.com";
 
 export default defineConfig({
   site: SITE,
