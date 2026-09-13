@@ -1,0 +1,81 @@
+{
+  "items": [
+    {
+      "nameEn": "Grounding Ritual",
+      "nameUk": "Ритуал заземлення",
+      "icon": "footprints",
+      "duration": 45,
+      "price": 55,
+      "priceNoteEn": "",
+      "priceNoteUk": "",
+      "descEn": "A restorative reflexology treatment designed to bring balance and stability to body and mind. Includes a personalised essential oil blend selected to support your individual needs.",
+      "descUk": "Відновлювальна рефлексотерапія, що повертає рівновагу та стабільність тілу й розуму. Включає індивідуальну суміш ефірних олій, підібрану під ваші потреби."
+    },
+    {
+      "nameEn": "Indian Head Ritual",
+      "nameUk": "Індійський масаж голови",
+      "icon": "brain",
+      "duration": 45,
+      "price": 55,
+      "priceNoteEn": "",
+      "priceNoteUk": "",
+      "descEn": "A deeply relaxing head, neck and shoulder treatment. Available as a dry treatment or enhanced with a bespoke aromatherapy oil blend.",
+      "descUk": "Глибоко розслаблюючий масаж голови, шиї та плечей. Доступний як «сухий» або з індивідуальною ароматерапевтичною сумішшю олій."
+    },
+    {
+      "nameEn": "Aroma Renewal Ritual",
+      "nameUk": "Ритуал ароматичного оновлення",
+      "icon": "flower-2",
+      "duration": 75,
+      "price": 95,
+      "priceNoteEn": "",
+      "priceNoteUk": "",
+      "descEn": "A full-body aromatherapy experience featuring custom-blended essential oils for both body and scalp. Includes a soothing scalp massage to encourage deep relaxation and emotional wellbeing.",
+      "descUk": "Ароматерапія для всього тіла з індивідуальною сумішшю ефірних олій для тіла та шкіри голови. Включає заспокійливий масаж голови для глибокого розслаблення та емоційного добробуту."
+    },
+    {
+      "nameEn": "Warm Stone Ritual",
+      "nameUk": "Ритуал теплих каменів",
+      "icon": "gem",
+      "duration": 75,
+      "price": 95,
+      "priceNoteEn": "",
+      "priceNoteUk": "",
+      "descEn": "A nurturing full-body treatment using warm stones to release tension and promote deep relaxation. Enhanced with personalised aromatherapy oils if desired.",
+      "descUk": "Дбайлива процедура для всього тіла з теплими каменями, що знімає напругу та дарує глибоке розслаблення. За бажанням доповнюється індивідуальними ароматичними оліями."
+    },
+    {
+      "nameEn": "Chakra Balance Ritual",
+      "nameUk": "Ритуал балансу чакр",
+      "icon": "sparkles",
+      "duration": 75,
+      "price": 95,
+      "priceNoteEn": "",
+      "priceNoteUk": "",
+      "descEn": "A holistic balancing experience combining warm herbal Pinda Sweda therapy, aromatic oils and scalp massage to restore harmony, flow and inner calm.",
+      "descUk": "Цілісна практика балансу, що поєднує теплу трав'яну терапію Pinda Sweda, ароматичні олії та масаж голови, щоб відновити гармонію, потік енергії та внутрішній спокій."
+    },
+    {
+      "nameEn": "Nurturing Ritual for Expecting Mothers",
+      "nameUk": "Дбайливий ритуал для майбутніх мам",
+      "icon": "heart",
+      "duration": 75,
+      "price": 95,
+      "priceNoteEn": "",
+      "priceNoteUk": "",
+      "descEn": "A gentle full-body pregnancy treatment designed to ease physical discomfort and encourage deep rest. Includes a relaxing scalp massage with warm oil.",
+      "descUk": "М'яка процедура для всього тіла під час вагітності, що полегшує фізичний дискомфорт і дарує глибокий відпочинок. Включає розслаблюючий масаж голови з теплою олією."
+    },
+    {
+      "nameEn": "Couples Harmony Ritual",
+      "nameUk": "Ритуал гармонії для пари",
+      "icon": "users",
+      "duration": 75,
+      "price": 150,
+      "priceNoteEn": "per couple",
+      "priceNoteUk": "за пару",
+      "descEn": "A shared wellness experience for two, featuring warm oil massage, personalised aromatherapy blends and optional hot stone therapy for deeper relaxation and connection.",
+      "descUk": "Спільний велнес-досвід для двох: масаж теплою олією, індивідуальні ароматичні суміші та, за бажанням, терапія гарячими каменями для глибшого розслаблення та зв'язку."
+    }
+  ]
+}

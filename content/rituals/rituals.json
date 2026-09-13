@@ -1,0 +1,155 @@
+{
+  "items": [
+    {
+      "nameEn": "Aromatherapy Ritual",
+      "nameUk": "Ароматерапевтичний ритуал",
+      "image": "/media/ritual-aromatherapy.jpg",
+      "duration": 120,
+      "price": 135,
+      "subtitleEn": "Signature Experience · 2-Hour Journey",
+      "subtitleUk": "Фірмовий досвід · 2-годинна подорож",
+      "descEn": "A complete aromatherapy journey designed to relax, restore and renew you — inside and out.",
+      "descUk": "Повноцінна ароматерапевтична подорож, створена щоб розслабити, відновити й оновити вас — зсередини та ззовні.",
+      "includesEn": [
+        "Arrival & consultation",
+        "Full body aromatherapy massage (90 min)",
+        "Facial cleansing & mask",
+        "Indian head massage",
+        "Warm peppermint foot boots",
+        "Time to rest in silence"
+      ],
+      "includesUk": [
+        "Зустріч та консультація",
+        "Ароматерапевтичний масаж усього тіла (90 хв)",
+        "Очищення обличчя та маска",
+        "Індійський масаж голови",
+        "Теплі м'ятні чобітки для ніг",
+        "Час відпочинку в тиші"
+      ]
+    },
+    {
+      "nameEn": "Inner Harmony Ritual",
+      "nameUk": "Ритуал внутрішньої гармонії",
+      "image": "/media/ritual-inner-harmony.jpg",
+      "duration": 120,
+      "price": 135,
+      "subtitleEn": "2-Hour Journey",
+      "subtitleUk": "2-годинна подорож",
+      "descEn": "A grounding, chakra-focused journey to calm the nervous system and restore inner and energetic balance.",
+      "descUk": "Заземлююча подорож із фокусом на чакрах, щоб заспокоїти нервову систему та відновити внутрішню й енергетичну рівновагу.",
+      "includesEn": [
+        "Chakra balancing consultation",
+        "Personalised essential oil blend",
+        "Guided pranayama (breathwork)",
+        "Chakra balancing meditation",
+        "Pinda Sweda therapy",
+        "Aromatherapy body & scalp ritual",
+        "Restorative shavasana",
+        "Herbal tea & quiet reflection"
+      ],
+      "includesUk": [
+        "Консультація з балансу чакр",
+        "Індивідуальна суміш ефірних олій",
+        "Кероване пранаяма-дихання",
+        "Медитація балансу чакр",
+        "Терапія Pinda Sweda",
+        "Ароматерапія тіла та шкіри голови",
+        "Відновлювальна шавасана",
+        "Трав'яний чай і тиха рефлексія"
+      ]
+    },
+    {
+      "nameEn": "Harmony Within Ritual",
+      "nameUk": "Ритуал «Гармонія всередині»",
+      "image": "/media/ritual-harmony-within.jpg",
+      "duration": 120,
+      "price": 135,
+      "subtitleEn": "2-Hour Holistic Journey",
+      "subtitleUk": "2-годинна холістична подорож",
+      "descEn": "A deeply nurturing journey designed to restore balance, release tension and reconnect you with yourself.",
+      "descUk": "Глибоко дбайлива подорож, створена щоб відновити баланс, зняти напругу та повернути зв'язок із собою.",
+      "includesEn": [
+        "Consultation & aroma selection",
+        "Pranayama (breathwork)",
+        "Reflexology",
+        "Peppermint foot mask & hot boots",
+        "Indian head ritual",
+        "Shavasana (deep relaxation)",
+        "Organic herbal tea"
+      ],
+      "includesUk": [
+        "Консультація та підбір аромаолій",
+        "Пранаяма (дихальні практики)",
+        "Рефлексологія",
+        "М'ятна маска та теплі чобітки для ніг",
+        "Індійський ритуал для голови",
+        "Шавасана (глибоке розслаблення)",
+        "Органічний трав'яний чай"
+      ]
+    },
+    {
+      "nameEn": "Radiance Facial Ritual",
+      "nameUk": "Сяйний ритуал для обличчя",
+      "image": "/media/ritual-radiance-facial.jpg",
+      "duration": 75,
+      "price": 80,
+      "subtitleEn": "Facial Ritual",
+      "subtitleUk": "Ритуал для обличчя",
+      "descEn": "Perfect for those seeking radiant skin, deep relaxation and a moment of restorative self-care.",
+      "descUk": "Ідеально для тих, хто прагне сяючої шкіри, глибокого розслаблення та миті відновлювального догляду за собою.",
+      "includesEn": [
+        "Personal consultation & skin assessment",
+        "Deep cleansing & exfoliation",
+        "Face, neck & décolletage massage",
+        "Personalised treatment mask",
+        "Indian head or hand & arm massage",
+        "Peppermint foot mask & warm booties",
+        "Serum & moisture finish",
+        "Herbal tea & moment of stillness"
+      ],
+      "includesUk": [
+        "Консультація та оцінка стану шкіри",
+        "Глибоке очищення та ексфоліація",
+        "Масаж обличчя, шиї та декольте",
+        "Індивідуальна доглядова маска",
+        "Індійський масаж голови або масаж рук",
+        "М'ятна маска та теплі чобітки для ніг",
+        "Сироватка та зволожуюче завершення",
+        "Трав'яний чай і мить спокою"
+      ]
+    },
+    {
+      "nameEn": "Deep Cleansing Ritual",
+      "nameUk": "Ритуал глибокого очищення",
+      "image": "/media/ritual-deep-cleansing.jpg",
+      "duration": 75,
+      "price": 85,
+      "subtitleEn": "Facial Ritual",
+      "subtitleUk": "Ритуал для обличчя",
+      "descEn": "Perfect for clear, refreshed and radiant skin, and a moment of deep relaxation.",
+      "descUk": "Ідеально для чистої, свіжої та сяючої шкіри й миті глибокого розслаблення.",
+      "includesEn": [
+        "Personal consultation",
+        "Deep cleansing exfoliation",
+        "Pore opening mask",
+        "Ultrasonic cleansing",
+        "Pore closing mask",
+        "Indian head or hand & shoulder massage",
+        "Peppermint foot mask & warm booties",
+        "Serum & moisturising finish",
+        "Herbal tea & moment of stillness"
+      ],
+      "includesUk": [
+        "Особиста консультація",
+        "Глибоке очищення та ексфоліація",
+        "Маска для розкриття пор",
+        "Ультразвукове очищення",
+        "Маска для звуження пор",
+        "Індійський масаж голови або масаж плечей",
+        "М'ятна маска та теплі чобітки для ніг",
+        "Сироватка та зволожуюче завершення",
+        "Трав'яний чай і мить спокою"
+      ]
+    }
+  ]
+}
