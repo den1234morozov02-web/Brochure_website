@@ -5,8 +5,9 @@
   "private": true,
   "scripts": {
     "dev": "tinacms dev --noTelemetry -c \"astro dev\"",
-    "build": "tinacms build --noTelemetry && astro build",
-    "build:local": "tinacms build --local --skip-cloud-checks --noTelemetry -c \"astro build\"",
+    "build": "tinacms build --noTelemetry && astro build && npm run optimize-images",
+    "build:local": "tinacms build --local --skip-cloud-checks --noTelemetry -c \"astro build\" && npm run optimize-images",
+    "optimize-images": "node scripts/optimize-images.mjs",
     "preview": "astro preview",
     "astro": "astro"
   },
@@ -22,6 +23,7 @@
   "devDependencies": {
     "@tailwindcss/vite": "^4.0.6",
     "@tinacms/cli": "^2.7.0",
+    "sharp": "^0.34.5",
     "tailwindcss": "^4.0.6"
   }
 }
