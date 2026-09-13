@@ -3,7 +3,7 @@ import { Icon } from "astro-icon/components";
 import { tinaField } from "@tinacms/astro/tina-field";
 import { useTranslations } from "../i18n/ui";
 import { type Locale } from "../data/site";
-import { present, type QualificationsData } from "../lib/tina/data";
+import { mediaSrc, present, type QualificationsData } from "../lib/tina/data";
 
 interface Props {
   locale: Locale;
@@ -34,13 +34,13 @@ const certificates = present(data.certificates);
             <button
               type="button"
               class="cert-thumb group shrink-0 overflow-hidden rounded-lg bg-white shadow-lg ring-1 ring-gold/30 transition hover:ring-gold/60"
-              data-cert-src={membership.image}
+              data-cert-src={mediaSrc(membership.image, Astro.isPrerendered)}
               data-cert-alt={membership.org}
               aria-label={`${t("cert.view")}: ${membership.org}`}
               data-tina-field={tinaField(membership, "image")}
             >
               <img
-                src={membership.image}
+                src={mediaSrc(membership.image, Astro.isPrerendered)}
                 alt={membership.org}
                 class="h-64 w-auto object-contain transition group-hover:scale-[1.03]"
               />
@@ -114,13 +114,13 @@ const certificates = present(data.certificates);
             <button
               type="button"
               class="cert-thumb group overflow-hidden rounded-lg bg-white/5 ring-1 ring-cream/10 transition hover:ring-gold/50"
-              data-cert-src={c.image}
+              data-cert-src={mediaSrc(c.image, Astro.isPrerendered)}
               data-cert-alt={uk ? c.titleUk : c.titleEn}
               aria-label={`${t("cert.view")}: ${uk ? c.titleUk : c.titleEn}`}
               data-tina-field={tinaField(c, "image")}
             >
               <img
-                src={c.image}
+                src={mediaSrc(c.image, Astro.isPrerendered)}
                 alt={uk ? c.titleUk : c.titleEn}
                 loading="lazy"
                 class="aspect-[3/4] w-full object-cover transition group-hover:scale-105"

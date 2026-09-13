@@ -2,7 +2,7 @@
 import { tinaField } from "@tinacms/astro/tina-field";
 import { useTranslations } from "../i18n/ui";
 import { type Locale } from "../data/site";
-import type { AboutData } from "../lib/tina/data";
+import { mediaSrc, type AboutData } from "../lib/tina/data";
 
 interface Props {
   locale: Locale;
@@ -16,7 +16,7 @@ const bodyField = locale === "uk" ? "bodyUk" : "bodyEn";
 <section id="about" class="bg-cream py-20 md:py-28">
   <div class="mx-auto grid max-w-6xl items-center gap-10 px-4 md:grid-cols-2 md:gap-16">
     <img
-      src={data.photo ?? "/media/about-owner.jpg"}
+      src={mediaSrc(data.photo, Astro.isPrerendered) || "/media/about-owner.jpg"}
       alt={`${data.name} — holistic massage & aromatherapy therapist at Abadzhi Wellness Space, Dublin 2`}
       class="mx-auto w-full max-w-md rounded-2xl object-cover shadow-md md:max-w-none"
       width="1422"

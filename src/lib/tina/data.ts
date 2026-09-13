@@ -38,6 +38,24 @@ export const getFaq = () =>
 export const getContacts = () =>
   requestWithMetadata(client.queries.contacts({ relativePath: "contacts.json" }));
 
+/**
+ * Tina Cloud отдаёт картинки ссылками на свой CDN:
+ *   https://assets.tina.io/<clientId>/__staging/<branch>/__file/<путь>
+ * На опубликованном сайте берём тот же файл из нашего public/media: так сайт
+ * не зависит от CDN Tina, а картинки проходят сжатие при сборке
+ * (scripts/optimize-images.mjs). В редакторе (on-demand рендер) оставляем CDN —
+ * только что загруженного фото в /media ещё нет до пересборки.
+ * "media" — это mediaRoot из tina/config.ts.
+ */
+const TINA_MEDIA_URL = /^https?:\/\/assets\.[^/]*tina[^/]*\/[^/]+\/(?:__staging\/[^/]+\/)?(?:__file\/)?(.+)$/i;
+
+export const mediaSrc = (src: string | null | undefined, prerendered: boolean) => {
+  if (!src) return "";
+  if (!prerendered) return src;
+  const match = src.match(TINA_MEDIA_URL);
+  return match ? `/media/${match[1]}` : src;
+};
+
 /** Непустые элементы списка (в редакторе новый элемент может быть ещё не создан). */
 export const present = <T>(list: ReadonlyArray<T | null> | null | undefined): T[] =>
   (list ?? []).filter((x): x is T => x != null);

@@ -3,7 +3,7 @@ import { Icon } from "astro-icon/components";
 import { tinaField } from "@tinacms/astro/tina-field";
 import { useTranslations } from "../i18n/ui";
 import { type Locale } from "../data/site";
-import { present, type FaqData } from "../lib/tina/data";
+import { mediaSrc, present, type FaqData } from "../lib/tina/data";
 
 interface Props {
   locale: Locale;
@@ -55,7 +55,7 @@ const faqLd = {
               </p>
               {item.image && (
                 <img
-                  src={item.image}
+                  src={mediaSrc(item.image, Astro.isPrerendered)}
                   alt={uk ? item.qUk : item.qEn}
                   class="mt-4 w-full max-w-md rounded-xl shadow-sm ring-1 ring-cream-deep"
                   loading="lazy"

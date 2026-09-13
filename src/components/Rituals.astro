@@ -3,7 +3,7 @@ import { Icon } from "astro-icon/components";
 import { tinaField } from "@tinacms/astro/tina-field";
 import { useTranslations, localePath } from "../i18n/ui";
 import { type Locale } from "../data/site";
-import { present, type RitualsData } from "../lib/tina/data";
+import { mediaSrc, present, type RitualsData } from "../lib/tina/data";
 
 interface Props {
   locale: Locale;
@@ -35,7 +35,7 @@ const items = present(data.items);
               data-tina-field={tinaField(r)}
             >
               <img
-                src={r.image}
+                src={mediaSrc(r.image, Astro.isPrerendered)}
                 alt={`${name} — ${r.duration} ${t("services.min")} · Abadzhi Wellness Space, Dublin`}
                 class="aspect-[5/2] w-full object-cover object-top"
                 loading="lazy"
