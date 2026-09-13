@@ -1,15 +1,23 @@
 ---
 import "../styles/global.css";
 import { site, type Locale } from "../data/site";
-import { services, type Ritual } from "../data/services";
+import {
+  contactLinks,
+  openingHoursSchema,
+  priceRange,
+  type ContactsData,
+  type PriceRow,
+} from "../lib/tina/data";
 
 interface Props {
   locale: Locale;
-  rituals: Ritual[];
+  contacts: ContactsData;
+  rows: PriceRow[];
   title?: string;
   description?: string;
 }
-const { locale, rituals } = Astro.props;
+const { locale, contacts, rows } = Astro.props;
+const links = contactLinks(contacts);
 
 const title = Astro.props.title ?? site.seo[locale].title;
 const description = Astro.props.description ?? site.seo[locale].description;
@@ -25,38 +33,33 @@ const businessLd = {
   description: site.seo[locale].description,
   image: ogImage,
   url: canonical,
-  telephone: site.phone,
-  email: site.email,
-  priceRange: site.priceRange,
+  telephone: links.tel,
+  email: links.email,
+  priceRange: priceRange(rows),
   currenciesAccepted: "EUR",
   address: {
     "@type": "PostalAddress",
-    streetAddress: site.addressParts.street,
-    addressLocality: site.addressParts.locality,
-    addressRegion: site.addressParts.region,
-    postalCode: site.addressParts.postalCode,
-    addressCountry: site.addressParts.country,
+    streetAddress: contacts.street,
+    addressLocality: site.addressLocality,
+    addressRegion: site.addressRegion,
+    postalCode: contacts.eircode,
+    addressCountry: site.addressCountry,
   },
   geo: {
     "@type": "GeoCoordinates",
     latitude: site.geo.lat,
     longitude: site.geo.lng,
   },
-  hasMap: site.mapLink,
+  hasMap: links.mapLink,
   areaServed: { "@type": "City", name: "Dublin" },
-  openingHoursSpecification: site.openingHours.map((h) => ({
-    "@type": "OpeningHoursSpecification",
-    dayOfWeek: h.days,
-    opens: h.opens,
-    closes: h.closes,
-  })),
-  makesOffer: [...services, ...rituals].map((s) => ({
+  openingHoursSpecification: openingHoursSchema(contacts),
+  makesOffer: rows.map((s) => ({
     "@type": "Offer",
     priceCurrency: "EUR",
     price: s.price,
     itemOffered: { "@type": "Service", name: s.name[locale] },
   })),
-  sameAs: [site.instagram],
+  sameAs: links.instagramUrl ? [links.instagramUrl] : [],
 };
 ---
 

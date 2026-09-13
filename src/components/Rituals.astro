@@ -3,7 +3,7 @@ import { Icon } from "astro-icon/components";
 import { tinaField } from "@tinacms/astro/tina-field";
 import { useTranslations, localePath } from "../i18n/ui";
 import { type Locale } from "../data/site";
-import { ritualItems, type RitualsData } from "../lib/tina/data";
+import { present, type RitualsData } from "../lib/tina/data";
 
 interface Props {
   locale: Locale;
@@ -13,17 +13,17 @@ const { locale, data } = Astro.props;
 const t = useTranslations(locale);
 const base = localePath(locale);
 const uk = locale === "uk";
-const items = ritualItems(data);
+const items = present(data.items);
 ---
 
 <section id="rituals" class="bg-cream py-20 md:py-28">
   <div class="mx-auto max-w-6xl px-4">
     <div class="mx-auto max-w-2xl text-center">
-      <h2 class="font-serif text-4xl text-ink md:text-5xl">{t("rituals.title")}</h2>
+      <h2 class="font-serif text-4xl text-ink md:text-5xl" data-tina-field={tinaField(data)}>{t("rituals.title")}</h2>
       <p class="mt-4 text-ink/65">{t("rituals.subtitle")}</p>
     </div>
 
-    <div class="mt-14 grid gap-8 md:grid-cols-2" data-tina-field={tinaField(data, "items")}>
+    <div class="mt-14 grid gap-8 md:grid-cols-2" data-tina-field={tinaField(data)}>
       {
         items.map((r) => {
           const name = uk ? r.nameUk : r.nameEn;

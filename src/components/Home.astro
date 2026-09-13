@@ -12,7 +12,16 @@ import Certificates from "./Certificates.astro";
 import Contact from "./Contact.astro";
 import Footer from "./Footer.astro";
 import { type Locale } from "../data/site";
-import { getAbout, getRituals, toRituals } from "../lib/tina/data";
+import {
+  getAbout,
+  getContacts,
+  getFaq,
+  getGeneral,
+  getQualifications,
+  getRituals,
+  getServices,
+  priceRows,
+} from "../lib/tina/data";
 import { islands } from "../lib/tina/islands";
 
 interface Props {
@@ -20,27 +29,51 @@ interface Props {
 }
 const { locale } = Astro.props;
 
-const [about, ritualsRes] = await Promise.all([getAbout(), getRituals()]);
-const rituals = toRituals(ritualsRes.data.rituals);
+const [general, about, qualifications, services, rituals, faq, contacts] = await Promise.all([
+  getGeneral(),
+  getAbout(),
+  getQualifications(),
+  getServices(),
+  getRituals(),
+  getFaq(),
+  getContacts(),
+]);
+const rows = priceRows(services.data.services, rituals.data.rituals);
+const c = contacts.data.contacts;
+const params = { locale };
 ---
 
-<Layout locale={locale} rituals={rituals}>
+<Layout locale={locale} contacts={c} rows={rows}>
   <Header locale={locale} />
   <main>
-    <Hero locale={locale} />
-    <TinaIsland name="about" wrapper={islands.about.wrapper} params={{ locale }} primary>
+    <TinaIsland name="hero" wrapper={islands.hero.wrapper} params={params} primary>
+      <Hero locale={locale} general={general.data.general} contacts={c} />
+    </TinaIsland>
+    <TinaIsland name="about" wrapper={islands.about.wrapper} params={params}>
       <About locale={locale} data={about.data.about} />
     </TinaIsland>
-    <Certificates locale={locale} />
-    <Services locale={locale} />
-    <TinaIsland name="rituals" wrapper={islands.rituals.wrapper} params={{ locale }}>
-      <Rituals locale={locale} data={ritualsRes.data.rituals} />
+    <TinaIsland name="qualifications" wrapper={islands.qualifications.wrapper} params={params}>
+      <Certificates locale={locale} data={qualifications.data.qualifications} />
     </TinaIsland>
-    <Pricing locale={locale} rituals={rituals} />
-    <Faq locale={locale} />
-    <Contact locale={locale} rituals={rituals} />
+    <TinaIsland name="services" wrapper={islands.services.wrapper} params={params}>
+      <Services locale={locale} data={services.data.services} />
+    </TinaIsland>
+    <TinaIsland name="rituals" wrapper={islands.rituals.wrapper} params={params}>
+      <Rituals locale={locale} data={rituals.data.rituals} />
+    </TinaIsland>
+    <TinaIsland name="pricing" wrapper={islands.pricing.wrapper} params={params}>
+      <Pricing locale={locale} rows={rows} />
+    </TinaIsland>
+    <TinaIsland name="faq" wrapper={islands.faq.wrapper} params={params}>
+      <Faq locale={locale} data={faq.data.faq} />
+    </TinaIsland>
+    <TinaIsland name="contact" wrapper={islands.contact.wrapper} params={params}>
+      <Contact locale={locale} contacts={c} rows={rows} />
+    </TinaIsland>
   </main>
-  <Footer locale={locale} />
+  <TinaIsland name="footer" wrapper={islands.footer.wrapper} params={params}>
+    <Footer locale={locale} contacts={c} />
+  </TinaIsland>
 </Layout>
 
 <script>

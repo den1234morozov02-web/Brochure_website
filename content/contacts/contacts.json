@@ -1,0 +1,45 @@
+{
+  "phone": "+353 87 670 7356",
+  "email": "beautyspacedublin@gmail.com",
+  "instagram": "abadzhi.ie",
+  "street": "7 Upper Pembroke Street",
+  "area": "Dublin 2",
+  "eircode": "D02 T681",
+  "hours": {
+    "mon": {
+      "closed": true,
+      "open": "",
+      "close": ""
+    },
+    "tue": {
+      "closed": false,
+      "open": "10:00",
+      "close": "20:00"
+    },
+    "wed": {
+      "closed": false,
+      "open": "10:00",
+      "close": "20:00"
+    },
+    "thu": {
+      "closed": false,
+      "open": "10:00",
+      "close": "20:00"
+    },
+    "fri": {
+      "closed": true,
+      "open": "",
+      "close": ""
+    },
+    "sat": {
+      "closed": true,
+      "open": "",
+      "close": ""
+    },
+    "sun": {
+      "closed": false,
+      "open": "10:00",
+      "close": "20:00"
+    }
+  }
+}

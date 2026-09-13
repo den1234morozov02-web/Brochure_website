@@ -1,65 +1,88 @@
 ---
 import { Icon } from "astro-icon/components";
+import { tinaField } from "@tinacms/astro/tina-field";
 import { useTranslations } from "../i18n/ui";
 import { type Locale } from "../data/site";
-import { certificates, membership } from "../data/certificates";
+import { present, type QualificationsData } from "../lib/tina/data";
 
 interface Props {
   locale: Locale;
+  data: QualificationsData;
 }
-const { locale } = Astro.props;
+const { locale, data } = Astro.props;
 const t = useTranslations(locale);
+const uk = locale === "uk";
+const membership = data.membership;
+const certificates = present(data.certificates);
 ---
 
 <section id="qualifications" class="bg-ink py-20 text-cream md:py-28">
   <div class="mx-auto max-w-6xl px-4">
     <div class="mx-auto max-w-2xl text-center">
-      <h2 class="font-serif text-4xl text-gold-soft md:text-5xl">{t("cert.title")}</h2>
+      <h2 class="font-serif text-4xl text-gold-soft md:text-5xl" data-tina-field={tinaField(data)}>{t("cert.title")}</h2>
       <p class="mt-4 text-cream/70">{t("cert.subtitle")}</p>
     </div>
 
     <!-- Главный сертификат: членство IMTA — всегда на виду -->
-    <div
-      class="mx-auto mt-10 max-w-3xl rounded-2xl bg-gold/10 p-5 ring-1 ring-gold/30 sm:p-7"
-    >
-      <div class="flex flex-col items-center gap-6 sm:flex-row sm:items-center">
-        <button
-          type="button"
-          class="cert-thumb group shrink-0 overflow-hidden rounded-lg bg-white shadow-lg ring-1 ring-gold/30 transition hover:ring-gold/60"
-          data-cert-src={membership.image}
-          data-cert-alt={membership.org}
-          aria-label={`${t("cert.view")}: ${membership.org}`}
+    {
+      membership && (
+        <div
+          class="mx-auto mt-10 max-w-3xl rounded-2xl bg-gold/10 p-5 ring-1 ring-gold/30 sm:p-7"
+          data-tina-field={tinaField(data, "membership")}
         >
-          <img
-            src={membership.image}
-            alt={membership.org}
-            class="h-64 w-auto object-contain transition group-hover:scale-[1.03]"
-          />
-        </button>
-        <div class="text-center sm:text-left">
-          <span
-            class="inline-flex items-center gap-2 rounded-full bg-gold/15 px-3 py-1 text-xs font-medium uppercase tracking-wider text-gold-soft"
-          >
-            <Icon name="lucide:badge-check" class="h-4 w-4" />
-            {membership.status[locale]}
-          </span>
-          <p class="mt-3 font-serif text-2xl text-cream">{membership.org}</p>
-          <p class="mt-2 text-sm text-cream/70">{t("cert.member")}: {membership.status[locale]}</p>
-          <p class="text-sm text-cream/70">No. {membership.number}</p>
-          <p class="text-sm text-cream/70">{t("cert.validUntil")}: {membership.validUntil}</p>
+          <div class="flex flex-col items-center gap-6 sm:flex-row sm:items-center">
+            <button
+              type="button"
+              class="cert-thumb group shrink-0 overflow-hidden rounded-lg bg-white shadow-lg ring-1 ring-gold/30 transition hover:ring-gold/60"
+              data-cert-src={membership.image}
+              data-cert-alt={membership.org}
+              aria-label={`${t("cert.view")}: ${membership.org}`}
+              data-tina-field={tinaField(membership, "image")}
+            >
+              <img
+                src={membership.image}
+                alt={membership.org}
+                class="h-64 w-auto object-contain transition group-hover:scale-[1.03]"
+              />
+            </button>
+            <div class="text-center sm:text-left">
+              <span
+                class="inline-flex items-center gap-2 rounded-full bg-gold/15 px-3 py-1 text-xs font-medium uppercase tracking-wider text-gold-soft"
+                data-tina-field={tinaField(membership, uk ? "statusUk" : "statusEn")}
+              >
+                <Icon name="lucide:badge-check" class="h-4 w-4" />
+                {uk ? membership.statusUk : membership.statusEn}
+              </span>
+              <p class="mt-3 font-serif text-2xl text-cream" data-tina-field={tinaField(membership, "org")}>
+                {membership.org}
+              </p>
+              <p class="mt-2 text-sm text-cream/70">
+                {t("cert.member")}: {uk ? membership.statusUk : membership.statusEn}
+              </p>
+              <p class="text-sm text-cream/70" data-tina-field={tinaField(membership, "number")}>
+                No. {membership.number}
+              </p>
+              <p class="text-sm text-cream/70" data-tina-field={tinaField(membership, "validUntil")}>
+                {t("cert.validUntil")}: {membership.validUntil}
+              </p>
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
+      )
+    }
 
     <!-- Список квалификаций -->
-    <ul class="mx-auto mt-10 grid max-w-4xl gap-x-8 gap-y-3 sm:grid-cols-2">
+    <ul
+      class="mx-auto mt-10 grid max-w-4xl gap-x-8 gap-y-3 sm:grid-cols-2"
+      data-tina-field={tinaField(data)}
+    >
       {
         certificates.map((c) => (
-          <li class="flex items-start gap-2 text-cream/85">
+          <li class="flex items-start gap-2 text-cream/85" data-tina-field={tinaField(c)}>
             <Icon name="lucide:award" class="mt-1 h-4 w-4 shrink-0 text-gold" />
             <span>
-              {c.title[locale]}
-              <span class="text-cream/45"> · {c.issuer}</span>
+              <span data-tina-field={tinaField(c, uk ? "titleUk" : "titleEn")}>{uk ? c.titleUk : c.titleEn}</span>
+              <span class="text-cream/45" data-tina-field={tinaField(c, "issuer")}> · {c.issuer}</span>
             </span>
           </li>
         ))
@@ -92,12 +115,13 @@ const t = useTranslations(locale);
               type="button"
               class="cert-thumb group overflow-hidden rounded-lg bg-white/5 ring-1 ring-cream/10 transition hover:ring-gold/50"
               data-cert-src={c.image}
-              data-cert-alt={c.title[locale]}
-              aria-label={`${t("cert.view")}: ${c.title[locale]}`}
+              data-cert-alt={uk ? c.titleUk : c.titleEn}
+              aria-label={`${t("cert.view")}: ${uk ? c.titleUk : c.titleEn}`}
+              data-tina-field={tinaField(c, "image")}
             >
               <img
                 src={c.image}
-                alt={c.title[locale]}
+                alt={uk ? c.titleUk : c.titleEn}
                 loading="lazy"
                 class="aspect-[3/4] w-full object-cover transition group-hover:scale-105"
               />
@@ -127,39 +151,26 @@ const t = useTranslations(locale);
 </section>
 
 <script>
-  // --- Сворачиваемая галерея (по умолчанию скрыта) ---
-  const galToggle = document.getElementById("cert-gallery-toggle");
-  const gallery = document.getElementById("cert-gallery");
-  const chevron = document.getElementById("cert-chevron");
-  const galLabel = galToggle?.querySelector<HTMLElement>("[data-toggle-label]");
+  // Обработчики вешаем на document (делегирование): в редакторе Tina секция
+  // перерисовывается целиком, и обработчики на самих элементах бы терялись.
+  const inEditor = window.self !== window.top;
 
   function setGallery(show: boolean) {
-    if (!gallery || !galToggle) return;
+    const gallery = document.getElementById("cert-gallery");
+    const toggle = document.getElementById("cert-gallery-toggle");
+    if (!gallery || !toggle) return;
     gallery.classList.toggle("hidden", !show);
-    galToggle.setAttribute("aria-expanded", String(show));
-    chevron?.classList.toggle("rotate-180", show);
-    if (galLabel) {
-      galLabel.textContent = show
-        ? galToggle.dataset.labelHide ?? ""
-        : galToggle.dataset.labelShow ?? "";
+    toggle.setAttribute("aria-expanded", String(show));
+    document.getElementById("cert-chevron")?.classList.toggle("rotate-180", show);
+    const label = toggle.querySelector<HTMLElement>("[data-toggle-label]");
+    if (label) {
+      label.textContent = show ? toggle.dataset.labelHide ?? "" : toggle.dataset.labelShow ?? "";
     }
   }
 
-  galToggle?.addEventListener("click", () =>
-    setGallery(gallery?.classList.contains("hidden") ?? false)
-  );
-
-  // Открытие галереи кликом по пункту "Qualifications" в навбаре
-  document.querySelectorAll('a[href$="#qualifications"]').forEach((link) => {
-    link.addEventListener("click", () => setGallery(true));
-  });
-
-  // --- Лайтбокс ---
-  const box = document.getElementById("cert-lightbox");
-  const full = document.getElementById("cert-full") as HTMLImageElement | null;
-  const close = document.getElementById("cert-close");
-
-  function open(src: string, alt: string) {
+  function openLightbox(src: string, alt: string) {
+    const box = document.getElementById("cert-lightbox");
+    const full = document.getElementById("cert-full") as HTMLImageElement | null;
     if (!box || !full) return;
     full.src = src;
     full.alt = alt;
@@ -167,23 +178,44 @@ const t = useTranslations(locale);
     box.classList.add("flex");
     document.body.style.overflow = "hidden";
   }
-  function hide() {
+
+  function hideLightbox() {
+    const box = document.getElementById("cert-lightbox");
     if (!box) return;
     box.classList.add("hidden");
     box.classList.remove("flex");
     document.body.style.overflow = "";
   }
 
-  document.querySelectorAll<HTMLButtonElement>(".cert-thumb").forEach((btn) => {
-    btn.addEventListener("click", () =>
-      open(btn.dataset.certSrc ?? "", btn.dataset.certAlt ?? "")
-    );
+  document.addEventListener("click", (e) => {
+    const target = e.target as HTMLElement;
+
+    if (target.closest("#cert-gallery-toggle")) {
+      setGallery(document.getElementById("cert-gallery")?.classList.contains("hidden") ?? false);
+      return;
+    }
+    // Открытие галереи кликом по пункту "Qualifications" в навбаре
+    if (target.closest('a[href$="#qualifications"]')) {
+      setGallery(true);
+      return;
+    }
+    // В редакторе клик по картинке выбирает поле, лайтбокс не открываем
+    const thumb = target.closest<HTMLElement>(".cert-thumb");
+    if (thumb && !inEditor) {
+      openLightbox(thumb.dataset.certSrc ?? "", thumb.dataset.certAlt ?? "");
+      return;
+    }
+    if (target.closest("#cert-close") || target.id === "cert-lightbox") hideLightbox();
   });
-  close?.addEventListener("click", hide);
-  box?.addEventListener("click", (e) => {
-    if (e.target === box) hide();
-  });
+
   document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape") hide();
+    if (e.key === "Escape") hideLightbox();
   });
+
+  // В редакторе галерея всегда раскрыта, чтобы было видно, какие картинки менять.
+  if (inEditor) {
+    const style = document.createElement("style");
+    style.textContent = "#cert-gallery.hidden{display:block}";
+    document.head.append(style);
+  }
 </script>

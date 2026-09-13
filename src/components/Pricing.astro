@@ -1,30 +1,15 @@
 ---
 import { useTranslations } from "../i18n/ui";
 import { type Locale } from "../data/site";
-import { services, type Ritual } from "../data/services";
+import type { PriceRow } from "../lib/tina/data";
 
 interface Props {
   locale: Locale;
-  rituals: Ritual[];
+  rows: PriceRow[];
 }
-const { locale, rituals } = Astro.props;
+// Прайс не редактируется напрямую: собирается из услуг и ритуалов.
+const { locale, rows } = Astro.props;
 const t = useTranslations(locale);
-
-// прайс = услуги + ритуалы одной таблицей
-const rows = [
-  ...services.map((s) => ({
-    name: s.name[locale],
-    duration: s.duration,
-    price: s.price,
-    note: s.priceNote?.[locale],
-  })),
-  ...rituals.map((r) => ({
-    name: r.name[locale],
-    duration: r.duration,
-    price: r.price,
-    note: undefined as string | undefined,
-  })),
-];
 ---
 
 <section id="pricing" class="bg-ink py-20 text-cream md:py-28">
@@ -35,14 +20,14 @@ const rows = [
       {
         rows.map((row) => (
           <div class="flex items-baseline justify-between gap-4 py-4">
-            <span class="min-w-0 font-serif text-xl text-cream">{row.name}</span>
+            <span class="min-w-0 font-serif text-xl text-cream">{row.name[locale]}</span>
             <span class="flex shrink-0 items-baseline gap-4">
               <span class="w-16 whitespace-nowrap text-right text-base text-cream/60 sm:w-20">
                 {row.duration} {t("services.min")}
               </span>
               <span class="w-16 text-right font-serif text-xl text-gold-soft">
                 €{row.price}
-                {row.note && <span class="block text-xs text-cream/50">{row.note}</span>}
+                {row.note?.[locale] && <span class="block text-xs text-cream/50">{row.note[locale]}</span>}
               </span>
             </span>
           </div>

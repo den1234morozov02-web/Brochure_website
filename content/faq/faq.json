@@ -1,0 +1,77 @@
+{
+  "items": [
+    {
+      "qEn": "What makes your treatments unique?",
+      "qUk": "Що робить ваші процедури особливими?",
+      "aEn": "My treatments combine reflexology, aromatherapy, Indian Head Massage, chakra balancing, Pinda Sweda, pranayama, meditation, and therapeutic essential oils. Every session is individually tailored to support your physical, emotional, and energetic wellbeing.",
+      "aUk": "Мої процедури поєднують рефлексологію, ароматерапію, індійський масаж голови, балансування чакр, Pinda Sweda, пранаяму, медитацію та терапевтичні ефірні олії. Кожен сеанс підбирається індивідуально, щоб підтримати ваше фізичне, емоційне та енергетичне благополуччя."
+    },
+    {
+      "qEn": "What can I expect during my first visit?",
+      "qUk": "Чого очікувати під час першого візиту?",
+      "aEn": "We begin with a consultation to understand your needs and create a personalised treatment. Each session is unique and designed to help you relax, restore balance, and reconnect with yourself.",
+      "aUk": "Ми починаємо з консультації, щоб зрозуміти ваші потреби та створити індивідуальну процедуру. Кожен сеанс унікальний і покликаний допомогти вам розслабитися, відновити рівновагу та повернутися до себе."
+    },
+    {
+      "qEn": "What conditions can these treatments help with?",
+      "qUk": "З якими станами можуть допомогти ці процедури?",
+      "aEn": "Clients often seek support for stress, anxiety, poor sleep, muscle tension, headaches, burnout, emotional overwhelm, and overall wellbeing.",
+      "aUk": "Клієнти часто звертаються по підтримку при стресі, тривозі, поганому сні, м'язовому напруженні, головних болях, вигоранні, емоційному перевантаженні та для загального добробуту."
+    },
+    {
+      "qEn": "Are these treatments a replacement for medical care?",
+      "qUk": "Чи замінюють ці процедури медичну допомогу?",
+      "aEn": "No. These therapies complement conventional healthcare but do not replace medical advice, diagnosis, or treatment.",
+      "aUk": "Ні. Ці терапії доповнюють традиційну медицину, але не замінюють медичних консультацій, діагностики чи лікування."
+    },
+    {
+      "qEn": "What should I wear?",
+      "qUk": "Що вдягнути на сеанс?",
+      "aEn": "Wear comfortable clothing. During body treatments, professional draping is always used to ensure your comfort and privacy.",
+      "aUk": "Вдягніть зручний одяг. Під час тілесних процедур завжди використовується професійне накривання (draping) для вашого комфорту та приватності."
+    },
+    {
+      "qEn": "How long is a treatment?",
+      "qUk": "Скільки триває процедура?",
+      "aEn": "Appointments usually last between 45 and 90 minutes, depending on the treatment.",
+      "aUk": "Сеанси зазвичай тривають від 45 до 90 хвилин залежно від процедури."
+    },
+    {
+      "qEn": "Do I need to prepare before my appointment?",
+      "qUk": "Чи потрібно готуватися перед сеансом?",
+      "aEn": "Simply arrive a few minutes early, wear comfortable clothing, and stay well hydrated before and after your treatment.",
+      "aUk": "Просто приходьте на кілька хвилин раніше, вдягніть зручний одяг та пийте достатньо води до та після процедури."
+    },
+    {
+      "qEn": "Can I book if I’m pregnant or have a medical condition?",
+      "qUk": "Чи можна записатися під час вагітності або за наявності захворювання?",
+      "aEn": "Please contact me before booking. Some treatments may need to be adapted or may require medical approval.",
+      "aUk": "Будь ласка, зв’яжіться зі мною перед записом. Деякі процедури можуть потребувати адаптації або медичного дозволу."
+    },
+    {
+      "qEn": "Are you a registered therapist?",
+      "qUk": "Чи є ви зареєстрованим терапевтом?",
+      "aEn": "Yes. I am a qualified member of the Irish Massage Therapists Association (IMTA) and fully insured to practise in Ireland.",
+      "aUk": "Так. Я кваліфікований член Ірландської асоціації масажних терапевтів (IMTA) та маю повне страхування для практики в Ірландії."
+    },
+    {
+      "qEn": "Can I claim through my health insurance?",
+      "qUk": "Чи можу я отримати відшкодування через медичне страхування?",
+      "aEn": "Depending on your policy, treatments provided by an IMTA-registered therapist may be eligible for reimbursement. A receipt will be provided after your appointment for insurance purposes.",
+      "aUk": "Залежно від вашого полісу, процедури, проведені терапевтом, зареєстрованим в IMTA, можуть підлягати відшкодуванню. Після сеансу ви отримаєте квитанцію для страхових цілей."
+    },
+    {
+      "qEn": "What is your cancellation policy?",
+      "qUk": "Які умови скасування запису?",
+      "aEn": "Please provide at least 24 hours’ notice if you need to cancel or reschedule your appointment.",
+      "aUk": "Будь ласка, попереджайте щонайменше за 24 години, якщо вам потрібно скасувати або перенести сеанс."
+    },
+    {
+      "qEn": "Do you offer gift vouchers?",
+      "qUk": "Чи пропонуєте ви подарункові сертифікати?",
+      "aEn": "Yes. Gift vouchers are available for all treatments and make a thoughtful gift for any occasion.",
+      "aUk": "Так. Подарункові сертифікати доступні для всіх процедур і стануть чудовим подарунком на будь-яку нагоду.",
+      "image": "/media/gift-voucher.jpg"
+    }
+  ]
+}

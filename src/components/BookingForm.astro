@@ -1,19 +1,17 @@
 ---
 import { useTranslations } from "../i18n/ui";
 import { site, type Locale } from "../data/site";
-import { services, type Ritual } from "../data/services";
+import type { PriceRow } from "../lib/tina/data";
 
 interface Props {
   locale: Locale;
-  rituals: Ritual[];
+  rows: PriceRow[];
 }
-const { locale, rituals } = Astro.props;
+const { locale, rows } = Astro.props;
 const t = useTranslations(locale);
 
-const options = [
-  ...services.map((s) => s.name[locale]),
-  ...rituals.map((r) => r.name[locale]),
-];
+// Варианты «Послуга» = все услуги и ритуалы (тот же список, что в прайсе)
+const options = rows.map((r) => r.name[locale]);
 
 // Через выражение, иначе Astro срежет обратные слэши в литерале атрибута.
 // Скобки экранированы — иначе Chrome (флаг 'v') считает regex невалидным и игнорирует pattern.

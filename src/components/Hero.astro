@@ -1,14 +1,20 @@
 ---
 import { Icon } from "astro-icon/components";
+import { tinaField } from "@tinacms/astro/tina-field";
 import { useTranslations, localePath } from "../i18n/ui";
-import { site, type Locale } from "../data/site";
+import { type Locale } from "../data/site";
+import { contactLinks, type ContactsData, type GeneralData } from "../lib/tina/data";
 
 interface Props {
   locale: Locale;
+  general: GeneralData;
+  contacts: ContactsData;
 }
-const { locale } = Astro.props;
+const { locale, general, contacts } = Astro.props;
 const t = useTranslations(locale);
 const base = localePath(locale);
+const links = contactLinks(contacts);
+const taglineField = locale === "uk" ? "taglineUk" : "taglineEn";
 
 const waText = encodeURIComponent(
   locale === "uk"
@@ -38,8 +44,8 @@ const waText = encodeURIComponent(
     <h1 class="mt-8 font-serif text-3xl sm:text-5xl md:text-6xl text-gold-soft text-balance">
       Abadzhi Wellness Space
     </h1>
-    <p class="mx-auto mt-5 max-w-xl text-lg text-cream/80">
-      {site.tagline[locale]}
+    <p class="mx-auto mt-5 max-w-xl text-lg text-cream/80" data-tina-field={tinaField(general, taglineField)}>
+      {general[taglineField]}
     </p>
 
     <div class="mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row">
@@ -51,7 +57,7 @@ const waText = encodeURIComponent(
         {t("hero.cta")}
       </a>
       <a
-        href={`https://wa.me/${site.whatsapp}?text=${waText}`}
+        href={`https://wa.me/${links.whatsapp}?text=${waText}`}
         target="_blank"
         rel="noopener"
         class="inline-flex items-center gap-2 rounded-full border border-cream/30 px-6 py-3 font-medium text-cream hover:border-gold hover:text-gold transition-colors"

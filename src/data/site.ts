@@ -1,15 +1,10 @@
 /**
- * Единая точка правок контактов и реквизитов салона.
- * Пока стоят ПЛЕЙСХОЛДЕРЫ (помечены TODO) и тестовые контакты Дениса —
- * заменить на данные заказчицы перед запуском.
+ * То, что НЕ редактируется в Tina (техническое и SEO).
+ * Контакты, адрес, часы, слоган и весь контент — в content/*.json (правятся в /admin).
  */
 
 export const site = {
   name: "Abadzhi Wellness Space",
-  tagline: {
-    en: "A holistic space to reset, restore and reconnect with yourself.",
-    uk: "Простір цілісності, щоб відновитись і повернутись до себе.",
-  },
 
   // --- SEO: уникальные title/description под локаль (гео + услуги) ---
   seo: {
@@ -25,65 +20,19 @@ export const site = {
     },
   },
 
-  // --- Контакты ---
-  phone: "+353876707356",
-  phoneDisplay: "+353 87 670 7356",
-  whatsapp: "353876707356", // для wa.me (без + и пробелов), привязан к этому же номеру
-  email: "beautyspacedublin@gmail.com",
-
   // --- Web3Forms access key (получить на web3forms.com, бесплатно) ---
   // Письма уходят на email, привязанный к этому ключу.
   web3formsKey: "a737b0ef-04f6-4e24-861a-57e5045d8c04", // привязан к beautyspacedublin@gmail.com
 
-  // --- Адрес (ирландский почтовый адрес не транслитерируем) ---
-  address: {
-    en: "7 Upper Pembroke Street, Dublin 2, D02 T681",
-    uk: "7 Upper Pembroke Street, Dublin 2, D02 T681",
-  },
-  // Структурный адрес для Schema.org (PostalAddress)
-  addressParts: {
-    street: "7 Upper Pembroke Street",
-    locality: "Dublin",
-    region: "Co. Dublin",
-    postalCode: "D02 T681",
-    country: "IE",
-  },
+  // Для Schema.org (PostalAddress): улица и Eircode берутся из Tina, это — постоянное.
+  addressLocality: "Dublin",
+  addressRegion: "Co. Dublin",
+  addressCountry: "IE",
+
   // Координаты для гео-разметки. ПРИБЛИЗИТЕЛЬНЫЕ — уточни в Google Maps
   // (правый клик по точке салона → координаты) и впиши точные.
+  // При переезде салона обновить вручную.
   geo: { lat: 53.3346, lng: -6.2519 },
-  // Ценовой диапазон услуг (для rich-результатов)
-  priceRange: "€55–€150",
-  // встраиваемая карта Google (по адресу + eircode)
-  mapEmbed:
-    "https://www.google.com/maps?q=7%20Upper%20Pembroke%20Street%2C%20Dublin%202%2C%20D02%20T681&output=embed",
-  mapLink:
-    "https://maps.google.com/?q=7%20Upper%20Pembroke%20Street%2C%20Dublin%202%2C%20D02%20T681",
-
-  // --- Часы работы ---
-  hours: {
-    en: [
-      { days: "Tue – Thu", time: "10:00 AM – 8:00 PM" },
-      { days: "Sunday", time: "10:00 AM – 8:00 PM" },
-      { days: "Mon, Fri, Sat", time: "Closed" },
-    ],
-    uk: [
-      { days: "Вт – Чт", time: "10:00 – 20:00" },
-      { days: "Неділя", time: "10:00 – 20:00" },
-      { days: "Пн, Пт, Сб", time: "Вихідний" },
-    ],
-  },
-  // Машиночитаемые часы для Schema.org (openingHoursSpecification)
-  openingHours: [
-    {
-      days: ["Tuesday", "Wednesday", "Thursday", "Sunday"],
-      opens: "10:00",
-      closes: "20:00",
-    },
-  ],
-
-  // --- Соцсети ---
-  instagram: "https://instagram.com/abadzhi.ie",
-  instagramHandle: "@abadzhi.ie",
 } as const;
 
 export type Locale = "en" | "uk";

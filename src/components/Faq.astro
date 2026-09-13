@@ -1,23 +1,27 @@
 ---
 import { Icon } from "astro-icon/components";
+import { tinaField } from "@tinacms/astro/tina-field";
 import { useTranslations } from "../i18n/ui";
 import { type Locale } from "../data/site";
-import { faq } from "../data/faq";
+import { present, type FaqData } from "../lib/tina/data";
 
 interface Props {
   locale: Locale;
+  data: FaqData;
 }
-const { locale } = Astro.props;
+const { locale, data } = Astro.props;
 const t = useTranslations(locale);
+const uk = locale === "uk";
+const items = present(data.items);
 
 // FAQPage structured data — шанс на rich-результат в Google
 const faqLd = {
   "@context": "https://schema.org",
   "@type": "FAQPage",
-  mainEntity: faq.map((item) => ({
+  mainEntity: items.map((item) => ({
     "@type": "Question",
-    name: item.q[locale],
-    acceptedAnswer: { "@type": "Answer", text: item.a[locale] },
+    name: uk ? item.qUk : item.qEn,
+    acceptedAnswer: { "@type": "Answer", text: uk ? item.aUk : item.aEn },
   })),
 };
 ---
@@ -27,31 +31,35 @@ const faqLd = {
 <section id="faq" class="bg-cream pt-20 pb-12 md:pt-28 md:pb-14">
   <div class="mx-auto max-w-3xl px-4">
     <div class="mx-auto max-w-2xl text-center">
-      <h2 class="font-serif text-4xl text-ink md:text-5xl">{t("faq.title")}</h2>
+      <h2 class="font-serif text-4xl text-ink md:text-5xl" data-tina-field={tinaField(data)}>{t("faq.title")}</h2>
       <p class="mt-4 text-ink/65">{t("faq.subtitle")}</p>
     </div>
 
-    <div class="mt-12 space-y-3">
+    <div class="mt-12 space-y-3" data-tina-field={tinaField(data)}>
       {
-        faq.map((item) => (
-          <details class="group rounded-2xl bg-white px-6 shadow-sm ring-1 ring-cream-deep">
+        items.map((item) => (
+          <details
+            class="group rounded-2xl bg-white px-6 shadow-sm ring-1 ring-cream-deep"
+            data-tina-field={tinaField(item)}
+          >
             <summary class="flex cursor-pointer list-none items-center justify-between gap-4 py-5 text-base font-medium text-ink md:text-lg marker:hidden">
-              <span>{item.q[locale]}</span>
+              <span data-tina-field={tinaField(item, uk ? "qUk" : "qEn")}>{uk ? item.qUk : item.qEn}</span>
               <Icon
                 name="lucide:chevron-down"
                 class="h-5 w-5 shrink-0 text-sage transition-transform group-open:rotate-180"
               />
             </summary>
             <div class="pb-5 -mt-1">
-              <p class="leading-relaxed text-ink/75">{item.a[locale]}</p>
+              <p class="leading-relaxed text-ink/75" data-tina-field={tinaField(item, uk ? "aUk" : "aEn")}>
+                {uk ? item.aUk : item.aEn}
+              </p>
               {item.image && (
                 <img
                   src={item.image}
-                  alt={locale === "uk"
-                    ? "Подарунковий сертифікат Abadzhi Wellness Space, Дублін"
-                    : "Abadzhi Wellness Space gift certificate, Dublin"}
+                  alt={uk ? item.qUk : item.qEn}
                   class="mt-4 w-full max-w-md rounded-xl shadow-sm ring-1 ring-cream-deep"
                   loading="lazy"
+                  data-tina-field={tinaField(item, "image")}
                 />
               )}
             </div>

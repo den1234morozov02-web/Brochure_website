@@ -1,16 +1,19 @@
 ---
 import { Icon } from "astro-icon/components";
+import { tinaField } from "@tinacms/astro/tina-field";
 import { useTranslations } from "../i18n/ui";
-import { site, type Locale } from "../data/site";
+import { type Locale } from "../data/site";
 import BookingForm from "./BookingForm.astro";
-import type { Ritual } from "../data/services";
+import { contactLinks, hoursDisplay, type ContactsData, type PriceRow } from "../lib/tina/data";
 
 interface Props {
   locale: Locale;
-  rituals: Ritual[];
+  contacts: ContactsData;
+  rows: PriceRow[];
 }
-const { locale, rituals } = Astro.props;
+const { locale, contacts, rows } = Astro.props;
 const t = useTranslations(locale);
+const links = contactLinks(contacts);
 
 const waText = encodeURIComponent(
   locale === "uk"
@@ -20,24 +23,27 @@ const waText = encodeURIComponent(
 
 const contactBtns = [
   {
-    href: `https://wa.me/${site.whatsapp}?text=${waText}`,
+    href: `https://wa.me/${links.whatsapp}?text=${waText}`,
     icon: "lucide:message-circle",
     label: t("contact.whatsapp"),
-    value: site.phoneDisplay,
+    value: links.phoneDisplay,
+    field: "phone",
     external: true,
   },
   {
-    href: `tel:${site.phone}`,
+    href: `tel:${links.tel}`,
     icon: "lucide:phone",
     label: t("contact.call"),
-    value: site.phoneDisplay,
+    value: links.phoneDisplay,
+    field: "phone",
     external: false,
   },
   {
-    href: `mailto:${site.email}`,
+    href: `mailto:${links.email}`,
     icon: "lucide:mail",
     label: t("contact.email"),
-    value: site.email,
+    value: links.email,
+    field: "email",
     external: false,
   },
 ];
@@ -53,7 +59,7 @@ const contactBtns = [
     <div class="mt-14 grid gap-10 lg:grid-cols-2 lg:gap-16">
       <!-- Форма записи -->
       <div class="rounded-2xl bg-white p-7 shadow-sm ring-1 ring-cream-deep">
-        <BookingForm locale={locale} rituals={rituals} />
+        <BookingForm locale={locale} rows={rows} />
       </div>
 
       <!-- Контакты, адрес, часы, карта -->
@@ -66,6 +72,7 @@ const contactBtns = [
                 target={b.external ? "_blank" : undefined}
                 rel={b.external ? "noopener" : undefined}
                 class="flex flex-col items-center gap-1 rounded-xl bg-white p-4 text-center shadow-sm ring-1 ring-cream-deep transition-colors hover:ring-sage"
+                data-tina-field={tinaField(contacts, b.field)}
               >
                 <Icon name={b.icon} class="h-6 w-6 text-sage-deep" />
                 <span class="text-sm font-medium text-ink">{b.label}</span>
@@ -81,9 +88,9 @@ const contactBtns = [
               <Icon name="lucide:map-pin" class="h-5 w-5 text-sage" />
               {t("contact.address")}
             </h3>
-            <p class="mt-2 text-ink/70">{site.address[locale]}</p>
+            <p class="mt-2 text-ink/70" data-tina-field={tinaField(contacts, "street")}>{links.address}</p>
             <a
-              href={site.mapLink}
+              href={links.mapLink}
               target="_blank"
               rel="noopener"
               class="mt-1 inline-block text-sm text-sage underline-offset-2 hover:underline"
@@ -96,9 +103,9 @@ const contactBtns = [
               <Icon name="lucide:clock" class="h-5 w-5 text-sage" />
               {t("contact.hours")}
             </h3>
-            <ul class="mt-2 space-y-1 text-sm text-ink/70">
+            <ul class="mt-2 space-y-1 text-sm text-ink/70" data-tina-field={tinaField(contacts, "hours")}>
               {
-                site.hours[locale].map((h) => (
+                hoursDisplay(contacts, locale).map((h) => (
                   <li class="flex justify-between gap-4">
                     <span>{h.days}</span>
                     <span class="text-ink/55">{h.time}</span>
@@ -111,7 +118,7 @@ const contactBtns = [
 
         <div class="overflow-hidden rounded-2xl ring-1 ring-cream-deep">
           <iframe
-            src={site.mapEmbed}
+            src={links.mapEmbed}
             title="Map"
             class="h-64 w-full"
             loading="lazy"

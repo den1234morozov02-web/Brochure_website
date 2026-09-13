@@ -1,13 +1,17 @@
 ---
 import { Icon } from "astro-icon/components";
+import { tinaField } from "@tinacms/astro/tina-field";
 import { useTranslations } from "../i18n/ui";
-import { site, type Locale } from "../data/site";
+import { type Locale } from "../data/site";
+import { contactLinks, type ContactsData } from "../lib/tina/data";
 
 interface Props {
   locale: Locale;
+  contacts: ContactsData;
 }
-const { locale } = Astro.props;
+const { locale, contacts } = Astro.props;
 const t = useTranslations(locale);
+const links = contactLinks(contacts);
 const year = new Date().getFullYear();
 ---
 
@@ -16,18 +20,23 @@ const year = new Date().getFullYear();
     <img src="/media/logo.jpg" alt="Abadzhi Wellness Space" class="h-16 w-16 rounded-full object-cover ring-1 ring-gold/40" />
     <p class="font-serif text-xl text-gold-soft">Abadzhi Wellness Space</p>
 
-    <div class="flex items-center gap-4">
-      <span class="text-sm text-cream/60">{t("footer.follow")}:</span>
-      <a
-        href={site.instagram}
-        target="_blank"
-        rel="noopener"
-        class="inline-flex items-center gap-2 text-cream/80 transition-colors hover:text-gold"
-      >
-        <Icon name="lucide:instagram" class="h-5 w-5" />
-        {site.instagramHandle}
-      </a>
-    </div>
+    {
+      links.instagramUrl && (
+        <div class="flex items-center gap-4">
+          <span class="text-sm text-cream/60">{t("footer.follow")}:</span>
+          <a
+            href={links.instagramUrl}
+            target="_blank"
+            rel="noopener"
+            class="inline-flex items-center gap-2 text-cream/80 transition-colors hover:text-gold"
+            data-tina-field={tinaField(contacts, "instagram")}
+          >
+            <Icon name="lucide:instagram" class="h-5 w-5" />
+            {links.instagramHandle}
+          </a>
+        </div>
+      )
+    }
 
     <p class="text-xs text-cream/40">
       © {year} Abadzhi Wellness Space. {t("footer.rights")}
