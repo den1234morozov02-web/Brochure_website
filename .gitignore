@@ -28,5 +28,9 @@ Thumbs.db
 # Всё, что используется сайтом, лежит в public/media/. Оригиналы держим локально.
 Медиа/
 
+# tina: генерируется командами tinacms dev/build
+tina/__generated__/
+public/admin/
+
 # прочее
 .w3/

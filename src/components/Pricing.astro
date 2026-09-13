@@ -1,12 +1,13 @@
 ---
 import { useTranslations } from "../i18n/ui";
 import { type Locale } from "../data/site";
-import { services, rituals } from "../data/services";
+import { services, type Ritual } from "../data/services";
 
 interface Props {
   locale: Locale;
+  rituals: Ritual[];
 }
-const { locale } = Astro.props;
+const { locale, rituals } = Astro.props;
 const t = useTranslations(locale);
 
 // прайс = услуги + ритуалы одной таблицей

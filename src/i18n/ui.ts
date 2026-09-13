@@ -19,8 +19,6 @@ export const ui = {
     "hero.whatsapp": "Message on WhatsApp",
 
     "about.title": "About",
-    "about.body":
-      "Based in the heart of Dublin 2, I create personalised wellness rituals for people who feel overwhelmed, disconnected, exhausted or constantly in “doing mode”. Each session combines breathwork, meditation, aromatherapy, reflexology and therapeutic touch to help restore balance, calm the nervous system and create space for deep rest.",
 
     "cert.title": "Qualifications & Certifications",
     "cert.subtitle":
@@ -92,8 +90,6 @@ export const ui = {
     "hero.whatsapp": "Написати у WhatsApp",
 
     "about.title": "Про нас",
-    "about.body":
-      "У самому серці Дубліна (Dublin 2) я створюю індивідуальні велнес-ритуали для тих, хто почувається перевантаженим, виснаженим, втратив зв'язок із собою або постійно перебуває в режимі «треба все встигнути». Кожен сеанс поєднує дихальні практики, медитацію, ароматерапію, рефлексологію та терапевтичний дотик, щоб відновити рівновагу, заспокоїти нервову систему та створити простір для глибокого відпочинку.",
 
     "cert.title": "Кваліфікація та сертифікати",
     "cert.subtitle":
